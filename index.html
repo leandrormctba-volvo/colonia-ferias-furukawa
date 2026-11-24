@@ -143,18 +143,17 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 .cp .tag{position:absolute;top:18px;right:18px;background:var(--sol);color:var(--marinho);font-weight:800;font-size:11.5px;padding:4px 10px;border-radius:999px}
 
 /* ---------- investimento ---------- */
-.planos{display:grid;gap:16px;grid-template-columns:repeat(4,1fr)}
-.pl{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 6px 20px rgba(0,47,108,.08);border:2px solid transparent;cursor:pointer;transition:.25s;text-align:center;position:relative}
-.pl:hover{transform:translateY(-4px)}
-.pl.on{border-color:var(--azul);box-shadow:0 12px 30px rgba(0,94,184,.22);transform:translateY(-6px)}
-.pl .faixa-n{font:600 15px 'Poppins';color:var(--marinho)}
-.pl .min{font-size:12.5px;color:var(--verde);font-weight:700;min-height:18px;margin-top:2px}
-.pl .preco{font:700 44px 'Poppins';color:var(--azul);margin:12px 0 0;line-height:1}
-.pl .preco sup{font-size:18px;vertical-align:top;margin-right:3px;position:relative;top:6px}
-.pl .por{font-size:13px;opacity:.7;font-weight:600}
-.pl .mon{margin-top:14px;padding-top:12px;border-top:1px dashed #d5e2ee;font-size:13.5px;font-weight:600;color:var(--marinho)}
-.pl.on::after{content:"Faixa selecionada";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap}
-.sim{margin-top:26px;background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 6px 20px rgba(0,47,108,.08);display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:20px;align-items:center}
+.cenarios{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin-top:18px}
+table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,47,108,.08);font-size:14px}
+.tc th{background:var(--marinho);color:#fff;font:600 13px 'Poppins';padding:9px 12px;text-align:left}
+.tc th.r,.tc td.r{text-align:right}
+.tc td{padding:6px 12px;border-bottom:1px solid #eef2f5;font-weight:600;color:var(--marinho);cursor:pointer;transition:background .2s}
+.tc tr:last-child td{border-bottom:0}
+.tc tbody tr:hover td{background:var(--pastel)}
+.tc tr.on td{background:var(--azul);color:#fff}
+.tc td.v{color:var(--azul);font-weight:800}
+.tc tr.on td.v{color:#fff}
+.sim{margin-top:6px;background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 6px 20px rgba(0,47,108,.08);display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:20px;align-items:center}
 .sim label{font-weight:700;color:var(--marinho);font-size:14px}
 .sim input[type=range]{width:100%;accent-color:var(--azul);margin-top:10px}
 .sim .num{font:700 26px 'Poppins';color:var(--marinho)}
@@ -194,7 +193,6 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 
 @media (max-width:1000px){
   .comp{grid-template-columns:repeat(2,1fr)}
-  .planos{grid-template-columns:repeat(2,1fr)}
   .sim{grid-template-columns:1fr 1fr}
 }
 @media (max-width:700px){
@@ -207,7 +205,7 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
   .capa .logo{margin-bottom:24px}
   .capa-foto{flex:0 0 38vh;clip-path:none}
   .flip{height:260px}
-  .comp,.planos,.sim{grid-template-columns:1fr}
+  .comp,.cenarios,.sim{grid-template-columns:1fr}
 }
 
 /* ---------- impressão / PDF ---------- */
@@ -403,23 +401,17 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
   <section class="slide">
     <span class="etiqueta">Investimento</span>
     <h2>Valores por criança</h2>
-    <p class="sub">Quanto mais crianças confirmadas, menor o valor por criança. Clique em uma faixa ou use o simulador.</p>
-    <div class="planos" id="planos"></div>
+    <p class="sub" style="margin-bottom:16px">Quanto mais crianças confirmadas, menor o valor por criança. Mova o seletor ou clique em um cenário.</p>
     <div class="sim">
       <div>
         <label for="qtd">Crianças confirmadas: <span class="num" id="qtdTxt">50</span></label>
-        <input type="range" id="qtd" min="30" max="200" value="50">
+        <input type="range" id="qtd" min="50" max="200" step="10" value="50">
       </div>
-      <div class="k"><small>Valor por criança</small><b id="vUn">R$ 399</b></div>
-      <div class="k"><small>Monitores</small><b id="vMon">5</b></div>
-      <div class="k"><small>Total estimado</small><b id="vTot">R$ 19.950</b></div>
-      <div class="alerta" id="alerta">Abaixo do mínimo: a colônia só acontece com pelo menos 40 crianças confirmadas.</div>
+      <div class="k"><small>Cenário</small><b id="vCen">1</b></div>
+      <div class="k"><small>Valor estimado total do evento</small><b id="vTot">R$ 20.900</b></div>
+      <div class="k"><small>Valor por criança</small><b id="vUn">R$ 418,00</b></div>
     </div>
-    <div class="regras">
-      <div><svg><use href="#i-check"/></svg>Mínimo de 40 crianças confirmadas para a colônia acontecer</div>
-      <div><svg><use href="#i-check"/></svg>Sempre 1 monitor para cada 10 crianças</div>
-      <div><svg><use href="#i-check"/></svg>Limite de 200 crianças</div>
-    </div>
+    <div class="cenarios" id="cenarios"></div>
   </section>
 
   <!-- 7 FINAL -->
@@ -525,32 +517,26 @@ document.addEventListener('mousemove',e=>{if(!tip.classList.contains('show'))ret
   if(x+w>innerWidth-8)x=e.clientX-w-16; if(y+h>innerHeight-8)y=e.clientY-h-16; tip.style.left=x+'px';tip.style.top=y+'px'});
 
 /* ---------- investimento ---------- */
-const FAIXAS=[
-  {de:40, ate:50,  v:399, nome:'Até 50 crianças', min:'Mínimo de 40 confirmadas'},
-  {de:51, ate:100, v:350, nome:'51 a 100 crianças', min:''},
-  {de:101,ate:150, v:299, nome:'101 a 150 crianças', min:''},
-  {de:151,ate:200, v:249, nome:'151 a 200 crianças', min:''},
-];
+/* cenários: valor total estimado do evento e valor por criança (total ÷ crianças) */
+const CEN=[[50,20900],[60,26200],[70,28500],[80,30800],[90,33100],[100,35400],[110,37700],[120,40000],
+  [130,42300],[140,44600],[150,46900],[160,49200],[170,51500],[180,53800],[190,56100],[200,58400]]
+  .map(([n,t],i)=>({c:i+1,n,t,u:t/n}));
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
-document.getElementById('planos').innerHTML=FAIXAS.map((f,i)=>`
-  <div class="pl" data-i="${i}">
-    <div class="faixa-n">${f.nome}</div><div class="min">${f.min}</div>
-    <div class="preco"><sup>R$</sup>${f.v}</div><div class="por">por criança</div>
-    <div class="mon">${Math.ceil(f.de/10)} a ${f.ate/10} monitores</div>
-  </div>`).join('');
+const brl2=n=>'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const tabela=lista=>`<table class="tc"><thead><tr><th>Cenário</th><th>Crianças</th><th class="r">Valor estimado total</th><th class="r">Valor por criança</th></tr></thead><tbody>${
+  lista.map(x=>`<tr data-n="${x.n}"><td>${x.c}</td><td>${x.n}</td><td class="r">${brl(x.t)}</td><td class="r v">${brl2(x.u)}</td></tr>`).join('')}</tbody></table>`;
+document.getElementById('cenarios').innerHTML=tabela(CEN.slice(0,8))+tabela(CEN.slice(8));
 const qtd=document.getElementById('qtd');
 function simula(){
   const n=+qtd.value; document.getElementById('qtdTxt').textContent=n;
-  const fi=FAIXAS.findIndex(f=>n<=f.ate); const f=FAIXAS[Math.max(0,fi)];
-  const abaixo=n<40;
-  document.querySelectorAll('.pl').forEach((p,i)=>p.classList.toggle('on',!abaixo&&i===fi));
-  document.getElementById('vUn').textContent=abaixo?'—':brl(f.v);
-  document.getElementById('vMon').textContent=Math.ceil(n/10);
-  document.getElementById('vTot').textContent=abaixo?'—':brl(n*f.v);
-  document.getElementById('alerta').style.display=abaixo?'block':'none';
+  const x=CEN.find(c=>c.n===n)||CEN[0];
+  document.querySelectorAll('.tc tr[data-n]').forEach(r=>r.classList.toggle('on',+r.dataset.n===x.n));
+  document.getElementById('vCen').textContent=x.c;
+  document.getElementById('vTot').textContent=brl(x.t);
+  document.getElementById('vUn').textContent=brl2(x.u);
 }
 qtd.addEventListener('input',simula);
-document.getElementById('planos').addEventListener('click',e=>{const p=e.target.closest('.pl');if(!p)return;qtd.value=FAIXAS[+p.dataset.i].ate;simula()});
+document.getElementById('cenarios').addEventListener('click',e=>{const r=e.target.closest('tr[data-n]');if(!r)return;qtd.value=r.dataset.n;simula()});
 simula();
 
 /* ---------- navegação ---------- */
