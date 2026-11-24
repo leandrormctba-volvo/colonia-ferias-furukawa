@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Colônia de Férias Frucal</title>
+<title>Colônia de Férias Furukawa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -226,7 +226,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
       </g>
       <text x="260" y="228" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="46" fill="#fff" stroke="#023047" stroke-width="8" paint-order="stroke" letter-spacing="1">Colônia de Férias</text>
       <g font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="64" text-anchor="middle" stroke="#023047" stroke-width="9" paint-order="stroke">
-        <text x="260" y="290"><tspan fill="#EF476F">F</tspan><tspan fill="#FFB703">R</tspan><tspan fill="#2A9D8F">U</tspan><tspan fill="#8ECAE6">C</tspan><tspan fill="#FB8500">A</tspan><tspan fill="#7B61FF">L</tspan></text>
+        <text x="260" y="290"><tspan fill="#EF476F">F</tspan><tspan fill="#FFB703">U</tspan><tspan fill="#2A9D8F">R</tspan><tspan fill="#8ECAE6">U</tspan><tspan fill="#FB8500">K</tspan><tspan fill="#7B61FF">A</tspan><tspan fill="#EF476F">W</tspan><tspan fill="#FFB703">A</tspan></text>
       </g>
     </symbol>
   </defs>
@@ -502,11 +502,11 @@ const PASSOS=[
   ['Encerramento especial','Algodão doce, pipoca, infláveis e cama elástica'],
   ['Equipe de monitores e recreadores','Quantidade por turma e planejamento das atividades'],
 ];
-let marcados=[];try{marcados=JSON.parse(localStorage.getItem('frucal-passos')||'[]')}catch(e){}
+let marcados=[];try{marcados=JSON.parse(localStorage.getItem('furukawa-passos')||'[]')}catch(e){}
 document.getElementById('check').innerHTML=PASSOS.map((p,i)=>`<label><input type="checkbox" data-i="${i}" ${marcados.includes(i)?'checked':''}><span>${p[0]}<small>${p[1]}</small></span></label>`).join('');
 function progresso(){const cks=[...document.querySelectorAll('#check input')];const n=cks.filter(c=>c.checked).length;
   document.getElementById('pct').textContent=`${n} de ${cks.length}`;document.getElementById('barra').style.width=(n/cks.length*100)+'%';
-  try{localStorage.setItem('frucal-passos',JSON.stringify(cks.filter(c=>c.checked).map(c=>+c.dataset.i)))}catch(e){}}
+  try{localStorage.setItem('furukawa-passos',JSON.stringify(cks.filter(c=>c.checked).map(c=>+c.dataset.i)))}catch(e){}}
 document.getElementById('check').addEventListener('change',progresso);progresso();
 
 /* ---------- navegação ---------- */
@@ -539,7 +539,7 @@ document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreen
   document.getElementById('txtFull').textContent=on?'Sair da tela cheia':'Tela cheia';
   document.getElementById('icoFull').innerHTML=on?'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>':'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'});
 /* PDF */
-document.getElementById('bPdf').onclick=()=>{const t=document.title;document.title='Proposta Colonia de Ferias Frucal';window.print();setTimeout(()=>document.title=t,500)};
+document.getElementById('bPdf').onclick=()=>{const t=document.title;document.title='Proposta Colonia de Ferias Furukawa';window.print();setTimeout(()=>document.title=t,500)};
 
 ir(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
 </script>
