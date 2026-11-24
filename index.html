@@ -30,7 +30,7 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 
 /* ---------- slides ---------- */
 .deck{position:relative;height:100vh;width:100vw}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw 90px;
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:safe center;padding:96px 6vw 90px;
   opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .55s ease,transform .55s ease,visibility .55s;overflow-y:auto}
 .slide.ativo{opacity:1;visibility:visible;transform:none}
 .slide.antes{transform:translateX(-40px)}
@@ -97,7 +97,7 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 .tog.on{background:var(--marinho);color:#fff}
 .tog.m.on{background:var(--verde);border-color:var(--verde)}
 .tog.M.on{background:var(--roxo);border-color:var(--roxo)}
-.cal-wrap{overflow-x:auto;border-radius:18px;box-shadow:var(--sombra);background:#fff}
+.cal-wrap{flex:none;overflow-x:auto;overflow-y:hidden;border-radius:18px;box-shadow:var(--sombra);background:#fff}
 table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:13.5px}
 .cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Baloo 2'}
 .cal th:first-child{width:96px}
