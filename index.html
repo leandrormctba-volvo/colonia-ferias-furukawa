@@ -101,9 +101,11 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:13.5px}
 .cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Baloo 2'}
 .cal th:first-child{width:96px}
-.cal td{padding:6px;border-bottom:1px solid #eef2f5;vertical-align:middle}
+.cal td{padding:3px 5px;border-bottom:1px solid #eef2f5;vertical-align:middle}
 .cal td.h{font-weight:800;color:var(--marinho);text-align:center;background:#f5f9fc;white-space:nowrap;font-size:13px}
-.cel{border-radius:10px;padding:8px 9px;font-weight:700;line-height:1.25;cursor:help;transition:.2s;position:relative;min-height:38px}
+.cel{border-radius:10px;padding:6px 9px;font-weight:700;line-height:1.2;cursor:help;transition:.2s;position:relative}
+.cal th{padding:8px!important}
+#cal-slide h2{font-size:clamp(28px,3.4vw,44px)}
 .cel:hover{transform:scale(1.04);box-shadow:0 6px 16px rgba(2,48,71,.18);z-index:3}
 .c-cafe{background:#FFE8B3}
 .c-rec{background:#D6EFF6}
@@ -124,7 +126,7 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 #tip b{color:var(--sol)}
 
 /* ---------- complementos ---------- */
-.lista-ac{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.lista-ac{display:grid;gap:14px;align-items:start;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
 details.ac{background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(2,48,71,.1);overflow:hidden;border-left:7px solid var(--azul)}
 details.ac:nth-child(2){border-color:var(--verde)} details.ac:nth-child(3){border-color:var(--laranja)}
 details.ac:nth-child(4){border-color:var(--rosa)} details.ac:nth-child(5){border-color:var(--roxo)} details.ac:nth-child(6){border-color:var(--sol)}
@@ -315,7 +317,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
   </section>
 
   <!-- 4 CALENDÁRIO -->
-  <section class="slide" style="justify-content:flex-start">
+  <section class="slide" id="cal-slide" style="justify-content:flex-start;padding-top:80px">
     <span class="etiqueta">Programação semanal</span>
     <h2>Calendário de atividades</h2>
     <div class="cal-ctrl">
@@ -473,7 +475,7 @@ function desenha(){
       if(c.turma==='M')pills='<span class="pill p-M">9–12 anos</span>';
       const ap = TURMA!=='todas' && c.turma && c.turma!=='alm' && c.turma!==TURMA ? ' apagado':'';
       const destaque = TURMA!=='todas' && c.turma===TURMA ? ';box-shadow:0 0 0 3px '+(TURMA==='m'?'var(--verde)':'var(--roxo)'):'';
-      h+=`<td><div class="cel ${c.c}${ap}" style="${destaque}" data-tip="${encodeURIComponent(`<b>${DIAS[d]} · ${hr}</b><br>${c.d}`)}">${c.t}${pills?'<br>'+pills:''}</div></td>`;
+      h+=`<td><div class="cel ${c.c}${ap}" style="${destaque}" data-tip="${encodeURIComponent(`<b>${DIAS[d]} · ${hr}</b><br>${c.d}`)}">${c.t} ${pills}</div></td>`;
     });
     h+='</tr>';
   });
