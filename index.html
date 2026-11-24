@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colônia de Férias Frucal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sol:#FFB703; --laranja:#FB8500; --azul:#219EBC; --marinho:#023047; --ceu:#8ECAE6;
+  --verde:#2A9D8F; --rosa:#EF476F; --roxo:#7B61FF; --creme:#FFF8EC; --texto:#16324a;
+  --card:#ffffff; --sombra:0 10px 30px rgba(2,48,71,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--texto);background:var(--creme);overflow:hidden}
+h1,h2,h3,.titulo{font-family:'Baloo 2','Nunito',sans-serif;line-height:1.05}
+
+/* ---------- barra superior ---------- */
+.topo{position:fixed;top:14px;right:16px;z-index:50;display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:800 15px 'Nunito',sans-serif;
+  padding:11px 16px;border-radius:999px;background:#fff;color:var(--marinho);box-shadow:var(--sombra);transition:.2s}
+.btn:hover{transform:translateY(-2px);background:var(--sol)}
+.btn svg{width:20px;height:20px}
+.btn.prim{background:var(--laranja);color:#fff}
+.btn.prim:hover{background:var(--rosa)}
+.marca-mini{position:fixed;top:14px;left:16px;z-index:50;width:120px;opacity:.95;transition:.3s}
+body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
+
+/* ---------- slides ---------- */
+.deck{position:relative;height:100vh;width:100vw}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw 90px;
+  opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .55s ease,transform .55s ease,visibility .55s;overflow-y:auto}
+.slide.ativo{opacity:1;visibility:visible;transform:none}
+.slide.antes{transform:translateX(-40px)}
+.slide h2{font-size:clamp(32px,4.6vw,58px);color:var(--marinho);margin-bottom:6px}
+.slide .sub{font-size:clamp(15px,1.5vw,20px);opacity:.8;margin-bottom:26px;max-width:900px}
+.etiqueta{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--laranja);margin-bottom:8px}
+
+/* fundo de bolinhas */
+.bolhas{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bolhas span{position:absolute;border-radius:50%;opacity:.18;animation:flutua 9s ease-in-out infinite}
+@keyframes flutua{50%{transform:translateY(-24px) scale(1.06)}}
+
+/* ---------- capa ---------- */
+.capa{background:linear-gradient(135deg,rgba(2,48,71,.78),rgba(33,158,188,.55)),url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1800&q=75') center/cover;color:#fff;align-items:center;text-align:center}
+.capa .logo{width:min(440px,78vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));animation:entra 1s ease both}
+.capa h1{font-size:clamp(40px,6.5vw,86px);margin-top:14px;text-shadow:0 6px 24px rgba(0,0,0,.35)}
+.capa h1 span{color:var(--sol)}
+.capa p{font-size:clamp(16px,1.8vw,22px);margin-top:12px;opacity:.95}
+.capa .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.chip{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);padding:10px 18px;border-radius:999px;font-weight:800}
+.comecar{margin-top:34px}
+@keyframes entra{from{opacity:0;transform:scale(.85) rotate(-4deg)}}
+.sol-gira{transform-origin:100px 100px;animation:gira 30s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+
+/* ---------- cards virar (objetivos) ---------- */
+.grade{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.flip{perspective:1200px;height:300px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flip:hover .in,.flip.virado .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:var(--sombra)}
+.frente{background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:20px}
+.frente::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(2,48,71,.92),rgba(2,48,71,.05) 65%)}
+.frente>*{position:relative}
+.frente .ico{font-size:34px}
+.frente h3{font-size:26px}
+.frente .grande{font:800 34px 'Baloo 2';color:var(--sol)}
+.frente small{opacity:.85;font-weight:700}
+.verso{transform:rotateY(180deg);padding:24px;color:#fff;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:16px}
+.verso h3{font-size:24px}
+.verso li{margin-left:18px;margin-bottom:4px}
+.dica{margin-top:18px;font-size:14px;opacity:.7;font-weight:700}
+
+/* ---------- atividades ---------- */
+.ativ{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.at{position:relative;border-radius:22px;overflow:hidden;height:210px;cursor:pointer;box-shadow:var(--sombra);background:#ccc center/cover;transition:transform .3s}
+.at:hover{transform:translateY(-6px) rotate(-.6deg)}
+.at::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(2,48,71,.9),transparent 60%);transition:.3s}
+.at:hover::after{background:linear-gradient(to top,rgba(251,133,0,.92),rgba(251,133,0,.15))}
+.at .t{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;color:#fff}
+.at .t b{font:800 22px 'Baloo 2';display:block}
+.at .t span{font-size:13px;font-weight:700;opacity:.9}
+.at .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--sol);color:var(--marinho);font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px}
+.at .mais{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--laranja);display:grid;place-items:center;font-weight:900;font-size:22px;transition:.3s}
+.at:hover .mais{transform:rotate(90deg)}
+.faixa{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.faixa div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:10px 14px;font-weight:700;box-shadow:0 4px 14px rgba(2,48,71,.08)}
+.faixa div s{color:var(--rosa)}
+
+/* ---------- calendário ---------- */
+.cal-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.tog{border:2px solid var(--marinho);background:#fff;color:var(--marinho);font:800 14px 'Nunito';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.2s}
+.tog.on{background:var(--marinho);color:#fff}
+.tog.m.on{background:var(--verde);border-color:var(--verde)}
+.tog.M.on{background:var(--roxo);border-color:var(--roxo)}
+.cal-wrap{overflow-x:auto;border-radius:18px;box-shadow:var(--sombra);background:#fff}
+table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:13.5px}
+.cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Baloo 2'}
+.cal th:first-child{width:96px}
+.cal td{padding:6px;border-bottom:1px solid #eef2f5;vertical-align:middle}
+.cal td.h{font-weight:800;color:var(--marinho);text-align:center;background:#f5f9fc;white-space:nowrap;font-size:13px}
+.cel{border-radius:10px;padding:8px 9px;font-weight:700;line-height:1.25;cursor:help;transition:.2s;position:relative;min-height:38px}
+.cel:hover{transform:scale(1.04);box-shadow:0 6px 16px rgba(2,48,71,.18);z-index:3}
+.c-cafe{background:#FFE8B3}
+.c-rec{background:#D6EFF6}
+.c-alm{background:#E4E4E4}
+.c-fim{background:#FFD6C2}
+.c-pas{background:linear-gradient(135deg,#C9F2E8,#E7DEFF);border:2px dashed var(--verde)}
+.c-enc{background:linear-gradient(135deg,#FFE066,#FFB4C4);border:2px solid var(--rosa)}
+.cel small{display:block;font-weight:700;opacity:.75;font-size:11.5px;margin-top:2px}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;color:#fff;margin:2px 2px 0 0}
+.p-m{background:var(--verde)} .p-M{background:var(--roxo)}
+.apagado{opacity:.28;filter:grayscale(.7)}
+.legenda{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;font-weight:700;align-items:center}
+.legenda i{display:inline-block;width:16px;height:16px;border-radius:5px;vertical-align:middle;margin-right:5px}
+.obs{margin-top:10px;font-size:13.5px;background:#fff;border-left:5px solid var(--laranja);padding:10px 14px;border-radius:10px}
+#tip{position:fixed;z-index:80;max-width:280px;background:var(--marinho);color:#fff;padding:10px 13px;border-radius:12px;font-size:13.5px;
+  pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;box-shadow:var(--sombra)}
+#tip.show{opacity:1;transform:none}
+#tip b{color:var(--sol)}
+
+/* ---------- complementos ---------- */
+.lista-ac{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+details.ac{background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(2,48,71,.1);overflow:hidden;border-left:7px solid var(--azul)}
+details.ac:nth-child(2){border-color:var(--verde)} details.ac:nth-child(3){border-color:var(--laranja)}
+details.ac:nth-child(4){border-color:var(--rosa)} details.ac:nth-child(5){border-color:var(--roxo)} details.ac:nth-child(6){border-color:var(--sol)}
+details.ac summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:14px;font:800 19px 'Baloo 2'}
+details.ac summary::-webkit-details-marker{display:none}
+details.ac summary .e{font-size:30px}
+details.ac summary::after{content:"+";margin-left:auto;font-size:26px;color:var(--laranja);transition:.3s}
+details.ac[open] summary::after{transform:rotate(45deg)}
+details.ac .cx{padding:0 20px 18px 62px;font-size:15.5px}
+details.ac .cx li{margin:4px 0 4px 16px}
+
+/* ---------- próximos passos ---------- */
+.check{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.check label{display:flex;gap:12px;align-items:flex-start;background:#fff;padding:14px 16px;border-radius:14px;box-shadow:0 4px 14px rgba(2,48,71,.08);cursor:pointer;font-weight:700;transition:.2s}
+.check label:hover{transform:translateX(4px)}
+.check input{width:22px;height:22px;accent-color:var(--verde);flex:none;margin-top:1px}
+.check input:checked+span{text-decoration:line-through;opacity:.55}
+.check small{display:block;font-weight:600;opacity:.75}
+.barra{height:12px;background:#e6eef3;border-radius:999px;overflow:hidden;margin:6px 0 18px;max-width:520px}
+.barra div{height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--sol));transition:width .4s}
+
+/* ---------- final ---------- */
+.final{background:linear-gradient(135deg,rgba(251,133,0,.85),rgba(239,71,111,.8)),url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=1800&q=75') center/cover;color:#fff;text-align:center;align-items:center}
+.final h2{color:#fff;font-size:clamp(40px,6vw,80px)}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:90;background:rgba(2,48,71,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:26px;max-width:760px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.mimg{height:240px;background:center/cover;position:relative}
+.mimg .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;font-size:22px;cursor:pointer;font-weight:900;color:var(--marinho)}
+.mtx{padding:22px 26px 26px}
+.mtx h3{font-size:32px;color:var(--marinho)}
+.mtx p{margin:8px 0 12px;font-size:16px}
+.mtx li{margin:5px 0 5px 20px;font-size:15.5px}
+.mtx .aviso{background:#FFF3D6;border-radius:12px;padding:10px 14px;font-size:14.5px;font-weight:700;margin-top:12px}
+
+/* ---------- navegação ---------- */
+.nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;background:#fff;padding:8px 12px;border-radius:999px;box-shadow:var(--sombra)}
+.nav button.seta{width:40px;height:40px;border-radius:50%;border:0;background:var(--marinho);color:#fff;font-size:20px;cursor:pointer;transition:.2s}
+.nav button.seta:hover{background:var(--laranja)}
+.nav button.seta:disabled{opacity:.3;cursor:default}
+.pontos{display:flex;gap:7px}
+.pontos button{width:11px;height:11px;border-radius:999px;border:0;background:#c9d6df;cursor:pointer;transition:.3s;padding:0}
+.pontos button.on{width:30px;background:var(--laranja)}
+.contador{font-weight:800;font-size:13px;color:var(--marinho);min-width:42px;text-align:center}
+
+@media (max-width:700px){
+  .btn span{display:none}
+  .btn{padding:11px}
+  .marca-mini{width:86px}
+  .slide{padding:76px 16px 90px;justify-content:flex-start}
+  .flip{height:260px}
+  details.ac .cx{padding-left:20px}
+}
+
+/* ---------- impressão / PDF ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{overflow:visible;background:#fff}
+  .topo,.nav,.marca-mini,#tip,.modal,.dica,.comecar{display:none!important}
+  .deck{height:auto}
+  .slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;transform:none!important;
+    height:210mm;width:297mm;page-break-after:always;break-after:page;overflow:hidden;padding:14mm 14mm}
+  .flip .in{transform:none!important}
+  .flip .verso{display:none}
+  details.ac .cx{display:block}
+  table.cal{font-size:10.5px;min-width:0}
+  .cel{padding:5px 6px;min-height:0}
+  .ativ .at{height:150px}
+  .apagado{opacity:1;filter:none}
+}
+</style>
+</head>
+<body data-slide="0">
+
+<!-- logo reutilizável -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 520 300">
+      <g transform="translate(160,20)">
+        <g class="sol-gira">
+          <g fill="#FFB703">
+            <path d="M100 0 l10 32 h-20z"/><path d="M100 200 l10 -32 h-20z"/>
+            <path d="M0 100 l32 10 v-20z"/><path d="M200 100 l-32 10 v-20z"/>
+            <path d="M29 29 l29 15 -14 14z"/><path d="M171 171 l-29 -15 14 -14z"/>
+            <path d="M171 29 l-15 29 -14 -14z"/><path d="M29 171 l15 -29 14 14z"/>
+          </g>
+        </g>
+        <circle cx="100" cy="100" r="58" fill="#FB8500"/>
+        <circle cx="100" cy="100" r="50" fill="#FFB703"/>
+        <circle cx="82" cy="92" r="6" fill="#023047"/><circle cx="118" cy="92" r="6" fill="#023047"/>
+        <path d="M76 112 q24 26 48 0" stroke="#023047" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <circle cx="70" cy="110" r="7" fill="#EF476F" opacity=".5"/><circle cx="130" cy="110" r="7" fill="#EF476F" opacity=".5"/>
+      </g>
+      <text x="260" y="228" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="46" fill="#fff" stroke="#023047" stroke-width="8" paint-order="stroke" letter-spacing="1">Colônia de Férias</text>
+      <g font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="64" text-anchor="middle" stroke="#023047" stroke-width="9" paint-order="stroke">
+        <text x="260" y="290"><tspan fill="#EF476F">F</tspan><tspan fill="#FFB703">R</tspan><tspan fill="#2A9D8F">U</tspan><tspan fill="#8ECAE6">C</tspan><tspan fill="#FB8500">A</tspan><tspan fill="#7B61FF">L</tspan></text>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<svg class="marca-mini" viewBox="0 0 520 300"><use href="#logo"/></svg>
+
+<div class="topo">
+  <button class="btn" id="bPdf" title="Baixar a apresentação em PDF (na janela que abrir, escolha “Salvar como PDF”)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    <span>Baixar PDF</span>
+  </button>
+  <button class="btn prim" id="bFull" title="Tela cheia (tecla F)">
+    <svg id="icoFull" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    <span id="txtFull">Tela cheia</span>
+  </button>
+</div>
+
+<main class="deck" id="deck">
+
+  <!-- 1 CAPA -->
+  <section class="slide capa ativo">
+    <svg class="logo" viewBox="0 0 520 300"><use href="#logo"/></svg>
+    <h1>Proposta <span>Colônia de Férias</span></h1>
+    <p>Duas semanas de muita diversão, criatividade e amizade para os filhos dos colaboradores</p>
+    <div class="chips">
+      <div class="chip">👧🧒 5 a 12 anos</div>
+      <div class="chip">⏰ 8h às 17h</div>
+      <div class="chip">📅 2 semanas</div>
+    </div>
+    <button class="btn comecar" onclick="ir(1)">Vamos começar! →</button>
+  </section>
+
+  <!-- 2 OBJETIVOS -->
+  <section class="slide">
+    <div class="bolhas"><span style="width:220px;height:220px;background:var(--sol);top:-60px;right:8%"></span><span style="width:140px;height:140px;background:var(--azul);bottom:40px;left:-30px;animation-delay:-3s"></span></div>
+    <span class="etiqueta">Visão geral</span>
+    <h2>Nossos objetivos</h2>
+    <p class="sub">Passe o mouse (ou toque) em cada cartão para ver os detalhes.</p>
+    <div class="grade">
+      <div class="flip"><div class="in">
+        <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=700&q=70')">
+          <div class="ico">👧🧒</div><small>Público-alvo</small><div class="grande">5 a 12 anos</div></div>
+        <div class="face verso" style="background:var(--verde)">
+          <h3>Público-alvo</h3>
+          <p>Crianças de <b>5 a 12 anos</b>, divididas em duas turmas para atividades adequadas a cada idade:</p>
+          <ul><li><b>Menores:</b> 5, 6, 7 e 8 anos</li><li><b>Maiores:</b> 9, 10, 11 e 12 anos</li></ul></div>
+      </div></div>
+      <div class="flip"><div class="in">
+        <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1533222481259-ce20eda1e20b?w=700&q=70')">
+          <div class="ico">⏰</div><small>Horário</small><div class="grande">8h às 17h</div></div>
+        <div class="face verso" style="background:var(--azul)">
+          <h3>Horário de aplicação</h3>
+          <ul><li>Recepção e café da manhã a partir das <b>8h</b></li><li>Almoço escalonado por turma</li><li>Lanche da tarde e atividades finais até as <b>17h</b></li></ul></div>
+      </div></div>
+      <div class="flip"><div class="in">
+        <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1627764940620-90393d0e8c34?w=700&q=70')">
+          <div class="ico">📅</div><small>Duração</small><div class="grande">2 semanas</div></div>
+        <div class="face verso" style="background:var(--laranja)">
+          <h3>Duração</h3>
+          <p><b>Duas semaninhas</b> de segunda a sexta, com uma programação que se repete e ganha momentos especiais:</p>
+          <ul><li>Passeios na quarta e na quinta</li><li>Encerramento festivo na sexta</li></ul></div>
+      </div></div>
+      <div class="flip"><div class="in">
+        <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=700&q=70')">
+          <div class="ico">🎨</div><small>Atividades</small><div class="grande">Criatividade</div></div>
+        <div class="face verso" style="background:var(--rosa)">
+          <h3>O que prevemos</h3>
+          <ul><li>Atividades recreativas</li><li>Oficinas</li><li>Recreadores com brincadeiras variadas</li></ul>
+          <p>Tudo <b>sem aparelhos tecnológicos</b> e sem materiais difíceis de conseguir — com foco na proatividade e criatividade dos monitores.</p></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 3 ATIVIDADES -->
+  <section class="slide">
+    <div class="bolhas"><span style="width:180px;height:180px;background:var(--rosa);top:30px;right:-40px"></span></div>
+    <span class="etiqueta">Atividades com os monitores</span>
+    <h2>O que vamos propor</h2>
+    <div class="faixa">
+      <div>✅ Criatividade dos monitores</div>
+      <div>✅ Materiais simples</div>
+      <div>🚫 <s>Celulares e tablets</s></div>
+      <div>🚫 <s>Equipamentos caros</s></div>
+    </div>
+    <div class="ativ" id="ativ"></div>
+    <p class="dica">👆 Clique em um cartão para ver mais informações.</p>
+  </section>
+
+  <!-- 4 CALENDÁRIO -->
+  <section class="slide" style="justify-content:flex-start">
+    <span class="etiqueta">Programação semanal</span>
+    <h2>Calendário de atividades</h2>
+    <div class="cal-ctrl">
+      <button class="tog on" data-sem="1">Semana 1</button>
+      <button class="tog" data-sem="2">Semana 2</button>
+      <span style="width:14px"></span>
+      <b style="font-size:14px">Destacar turma:</b>
+      <button class="tog on" data-t="todas">Todas</button>
+      <button class="tog m" data-t="m">Menores (5–8)</button>
+      <button class="tog M" data-t="M">Maiores (9–12)</button>
+    </div>
+    <div class="cal-wrap"><table class="cal" id="cal"></table></div>
+    <div class="legenda">
+      <span><i style="background:#FFE8B3"></i>Recepção / café</span>
+      <span><i style="background:#D6EFF6"></i>Atividades recreativas</span>
+      <span><i style="background:#E4E4E4"></i>Almoço</span>
+      <span><i style="background:#FFD6C2"></i>Atividades finais + lanche</span>
+      <span><i style="background:#C9F2E8;border:2px dashed var(--verde)"></i>Passeio*</span>
+      <span><i style="background:#FFE066;border:2px solid var(--rosa)"></i>Encerramento</span>
+    </div>
+    <div class="obs"><b>* Passeio:</b> verificar valores e se é possível realizar passeio externo — seria um diferencial da colônia de férias. Enquanto uma turma está no passeio ou no encerramento, a outra segue com as atividades recreativas.</div>
+  </section>
+
+  <!-- 5 COMPLEMENTOS -->
+  <section class="slide">
+    <div class="bolhas"><span style="width:200px;height:200px;background:var(--verde);bottom:-50px;right:10%"></span></div>
+    <span class="etiqueta">Organização e opcionais</span>
+    <h2>Complementos da proposta</h2>
+    <p class="sub">Clique em cada item para abrir os detalhes.</p>
+    <div class="lista-ac">
+      <details class="ac"><summary><span class="e">🚌</span>Passeio (opcional)</summary>
+        <div class="cx"><p>De acordo com a aceitação e o <b>valor da inscrição</b>.</p><ul><li>Seria um <b>chamariz</b> para as inscrições e adesão das famílias</li><li>Quarta: menores (5–8) · Quinta: maiores (9–12)</li><li>Verificar valores, transporte e autorização dos pais</li></ul></div></details>
+      <details class="ac"><summary><span class="e">🎬</span>Dia de cinema (opcional)</summary>
+        <div class="cx"><ul><li>Verificar se existe na empresa um <b>auditório ou sala de reuniões adaptável</b></li><li>Projetor/TV, almofadas no chão e <b>pipoca</b></li><li>Filmes com classificação livre</li></ul></div></details>
+      <details class="ac"><summary><span class="e">🔗</span>Tudo linkado para os pais</summary>
+        <div class="cx"><ul><li>Divulgar aos pais tudo o que será oferecido</li><li>Criar, se possível, uma <b>página de acompanhamento das atividades</b> no site da associação/clube (caso exista)</li><li>Fotos do dia, cardápio e avisos</li></ul></div></details>
+      <details class="ac"><summary><span class="e">👕</span>Camisetas ou coletes — crianças</summary>
+        <div class="cx"><ul><li>Peças de <b>destaque</b> (cores vivas) para usar no dia a dia</li><li>Facilita a identificação e a segurança</li><li>Cor diferente por turma (5–8 e 9–12)</li><li>Viram lembrança da colônia 💛</li></ul></div></details>
+      <details class="ac"><summary><span class="e">🦺</span>Coletes ou camisetas — monitores</summary>
+        <div class="cx"><ul><li>Identificação rápida dos monitores pelas crianças e pais</li><li>Cor exclusiva da equipe</li></ul></div></details>
+      <details class="ac"><summary><span class="e">🎉</span>Encerramento especial</summary>
+        <div class="cx"><ul><li>🍭 Algodão doce</li><li>🍿 Pipoca</li><li>🏰 Infláveis</li><li>🤸 Cama elástica</li><li>Sexta: manhã para os maiores, tarde para os menores</li></ul></div></details>
+    </div>
+  </section>
+
+  <!-- 6 PRÓXIMOS PASSOS -->
+  <section class="slide">
+    <span class="etiqueta">Para viabilizar</span>
+    <h2>Próximos passos</h2>
+    <p class="sub">Marque conforme os itens forem resolvidos: <b id="pct">0 de 0</b></p>
+    <div class="barra"><div id="barra"></div></div>
+    <div class="check" id="check"></div>
+  </section>
+
+  <!-- 7 FINAL -->
+  <section class="slide final">
+    <svg class="logo" style="width:min(340px,70vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3))" viewBox="0 0 520 300"><use href="#logo"/></svg>
+    <h2>Obrigado!</h2>
+    <p style="font-size:clamp(16px,1.8vw,22px);margin-top:10px">Vamos juntos fazer as férias mais divertidas do ano? ☀️</p>
+  </section>
+</main>
+
+<nav class="nav">
+  <button class="seta" id="ant" aria-label="Anterior">‹</button>
+  <div class="pontos" id="pontos"></div>
+  <span class="contador" id="cont"></span>
+  <button class="seta" id="prox" aria-label="Próximo">›</button>
+</nav>
+
+<div id="tip"></div>
+<div class="modal" id="modal"><div class="mbox"><div class="mimg" id="mImg"><button class="x" onclick="fecha()">×</button></div><div class="mtx" id="mTx"></div></div></div>
+
+<script>
+const IMG = id => `https://images.unsplash.com/photo-${id}?w=900&q=70`;
+
+/* ---------- atividades ---------- */
+const ATIV = [
+  {t:'Cinema', s:'Sessão com pipoca', tag:'Opcional', img:'1620177088258-c84147ee601f', e:'🎬',
+   p:'Um dia de cinema para as crianças, com filmes de classificação livre e muita pipoca.',
+   l:['Verificar se temos na empresa um auditório ou sala de reuniões que possa ser adaptada','Almofadas/tatames no chão para um clima aconchegante','Pipoca para todos'],
+   a:'Opcional: depende de espaço adequado dentro da empresa.'},
+  {t:'Caça ao tesouro', s:'Pistas e trabalho em equipe', img:'1761839262867-af53d08b0eb5', e:'🗺️',
+   p:'As crianças seguem pistas e desafios espalhados pelo espaço até encontrar o tesouro.',
+   l:['Mapas e pistas feitos pelos monitores','Equipes misturando idades próximas','Estimula raciocínio, cooperação e movimento']},
+  {t:'Rua do Lazer', s:'Brincadeiras de rua', img:'1655009316723-e4af5fe7afe1', e:'🛴',
+   p:'Um espaço com estações de brincadeiras clássicas, como nas ruas de antigamente.',
+   l:['Amarelinha, pular corda, elástico, bambolê','Corrida do saco, ovo na colher, cabo de guerra','Pintura de rosto e jogos com giz no chão']},
+  {t:'Oficinas', s:'Arte e trabalhos manuais', img:'1613950190144-4f2a84c75e8c', e:'✂️',
+   p:'Oficinas criativas com materiais simples e fáceis de conseguir.',
+   l:['Desenho, pintura, colagem e dobradura','Brinquedos com materiais recicláveis','Massinha caseira e fantoches']},
+  {t:'Brincadeiras dirigidas', s:'Recreadores em ação', img:'1776243773206-a29b683c97fb', e:'🤸',
+   p:'Jogos coletivos conduzidos pelos monitores, adaptados para cada faixa etária.',
+   l:['Queimada, pega-pega, estátua, esconde-esconde','Gincanas e circuitos motores','Dança, música e teatro']},
+  {t:'Encerramento especial', s:'Festa de fechamento', tag:'Sexta', img:'1509666537727-9154b6962292', e:'🎉',
+   p:'Uma grande festa para fechar cada semana com chave de ouro.',
+   l:['🍭 Algodão doce','🍿 Pipoca','🏰 Infláveis','🤸 Cama elástica'],
+   a:'Manhã de sexta: maiores (9–12) · Tarde de sexta: menores (5–8).'},
+  {t:'Passeio', s:'Atividade externa', tag:'Opcional*', img:'1761839258289-72f12b0de058', e:'🚌',
+   p:'Um passeio externo seria o grande diferencial da colônia — e um chamariz para as inscrições.',
+   l:['Quarta de manhã: menores (5–8)','Quinta de manhã: maiores (9–12)','De acordo com a aceitação e o valor da inscrição'],
+   a:'* Verificar valores e se é possível realizar o passeio externo.'},
+];
+document.getElementById('ativ').innerHTML = ATIV.map((a,i)=>`
+  <div class="at" style="background-image:url('${IMG(a.img)}')" onclick="abre(${i})" tabindex="0" onkeydown="if(event.key==='Enter')abre(${i})">
+    ${a.tag?`<span class="tag">${a.tag}</span>`:''}<span class="mais">+</span>
+    <div class="t"><b>${a.e} ${a.t}</b><span>${a.s}</span></div></div>`).join('');
+function abre(i){const a=ATIV[i];
+  document.getElementById('mImg').style.backgroundImage=`url('${IMG(a.img).replace('w=900','w=1200')}')`;
+  document.getElementById('mTx').innerHTML=`<h3>${a.e} ${a.t}</h3><p>${a.p}</p><ul>${a.l.map(x=>`<li>${x}</li>`).join('')}</ul>${a.a?`<div class="aviso">${a.a}</div>`:''}`;
+  document.getElementById('modal').classList.add('on');}
+function fecha(){document.getElementById('modal').classList.remove('on')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')fecha()});
+
+/* ---------- calendário ---------- */
+const DIAS=['Segunda','Terça','Quarta','Quinta','Sexta'];
+const REC={c:'c-rec',t:'Atividades recreativas',d:'Atividades recreativas com os monitores (brincadeiras, oficinas, gincanas).'};
+const cel=(c,t,d,turma)=>({c,t,d,turma});
+function grade(){
+  const linhas=[
+    ['08:00 – 09:00', ()=>cel('c-cafe','Recepção das crianças + café da manhã','Chegada, boas-vindas e café da manhã para todas as turmas.')],
+    ['09:00 – 10:00', d=>manha(d)],
+    ['10:00 – 11:00', d=>manha(d)],
+    ['11:00 – 11:30', d=>manha(d)],
+    ['11:30 – 13:00', ()=>cel('c-alm','Almoço',`<b>11:30–12:30</b> menores (5–8)<br><b>12:00–13:00</b> maiores (9–12)`,'alm')],
+    ['13:00 – 14:00', d=>tarde(d,0)],
+    ['14:00 – 15:00', d=>tarde(d,1)],
+    ['15:00 – 16:00', d=>tarde(d,2)],
+    ['16:00 – 17:00', ()=>cel('c-fim','Atividades finais do dia + lanche da tarde','Fechamento do dia, lanche da tarde e saída das crianças.')],
+  ];
+  return linhas;
+}
+function manha(d){
+  if(d===2) return cel('c-pas','Atividades recreativas / Passeio*','<b>Passeio*:</b> menores (5–8)<br>Maiores seguem nas atividades recreativas.','m');
+  if(d===3) return cel('c-pas','Atividades recreativas / Passeio*','<b>Passeio*:</b> maiores (9–12)<br>Menores seguem nas atividades recreativas.','M');
+  if(d===4) return cel('c-enc','Encerramento da semana — maiores','<b>09:00–11:30</b> encerramento da colônia para os maiores (9–12).<br>Menores seguem nas atividades recreativas.','M');
+  return cel(REC.c,REC.t,REC.d);
+}
+function tarde(d,i){
+  if(d===4){
+    if(i===0) return cel('c-rec','Atividades recreativas + <br>Encerramento menores (13:30)','<b>13:00–13:30</b> atividades recreativas<br><b>13:30–15:30</b> encerramento dos menores (5–8).','m');
+    if(i===1) return cel('c-enc','Encerramento da semana — menores','<b>13:30–15:30</b> encerramento da colônia para os menores (5–8).<br>Maiores seguem nas atividades recreativas.','m');
+    return cel('c-enc','Encerramento menores (até 15:30) + recreação','<b>até 15:30</b> encerramento dos menores<br><b>15:30–16:00</b> atividades recreativas.','m');
+  }
+  return cel(REC.c,REC.t,REC.d);
+}
+let SEM=1, TURMA='todas';
+function desenha(){
+  const L=grade();
+  let h=`<tr><th>Horário</th>${DIAS.map((d,i)=>`<th>${d}<br><small style="font:700 12px Nunito;opacity:.75">Semana ${SEM}</small></th>`).join('')}</tr>`;
+  L.forEach(([hr,f])=>{
+    h+=`<tr><td class="h">${hr}</td>`;
+    DIAS.forEach((_,d)=>{const c=f(d);
+      let pills='';
+      if(c.turma==='m')pills='<span class="pill p-m">5–8 anos</span>';
+      if(c.turma==='M')pills='<span class="pill p-M">9–12 anos</span>';
+      const ap = TURMA!=='todas' && c.turma && c.turma!=='alm' && c.turma!==TURMA ? ' apagado':'';
+      const destaque = TURMA!=='todas' && c.turma===TURMA ? ';box-shadow:0 0 0 3px '+(TURMA==='m'?'var(--verde)':'var(--roxo)'):'';
+      h+=`<td><div class="cel ${c.c}${ap}" style="${destaque}" data-tip="${encodeURIComponent(`<b>${DIAS[d]} · ${hr}</b><br>${c.d}`)}">${c.t}${pills?'<br>'+pills:''}</div></td>`;
+    });
+    h+='</tr>';
+  });
+  document.getElementById('cal').innerHTML=h;
+}
+desenha();
+document.querySelectorAll('[data-sem]').forEach(b=>b.onclick=()=>{SEM=+b.dataset.sem;document.querySelectorAll('[data-sem]').forEach(x=>x.classList.toggle('on',x===b));desenha()});
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{TURMA=b.dataset.t;document.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));desenha()});
+const tip=document.getElementById('tip');
+document.addEventListener('mouseover',e=>{const c=e.target.closest('[data-tip]');if(!c){tip.classList.remove('show');return}
+  tip.innerHTML=decodeURIComponent(c.dataset.tip);tip.classList.add('show')});
+document.addEventListener('mousemove',e=>{if(!tip.classList.contains('show'))return;
+  const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+16,y=e.clientY+16;
+  if(x+w>innerWidth-8)x=e.clientX-w-16; if(y+h>innerHeight-8)y=e.clientY-h-16; tip.style.left=x+'px';tip.style.top=y+'px'});
+
+/* ---------- próximos passos ---------- */
+const PASSOS=[
+  ['Valores e viabilidade do passeio externo','Transporte, ingressos, seguro e autorização dos pais'],
+  ['Espaço para o dia de cinema','Auditório ou sala de reuniões adaptável na empresa'],
+  ['Definir valor da inscrição','Considerar passeio e encerramento especial'],
+  ['Página de acompanhamento para os pais','No site da associação / clube, se houver'],
+  ['Camisetas ou coletes das crianças','Cores por turma, tamanhos e fornecedor'],
+  ['Coletes ou camisetas dos monitores','Cor exclusiva da equipe'],
+  ['Encerramento especial','Algodão doce, pipoca, infláveis e cama elástica'],
+  ['Equipe de monitores e recreadores','Quantidade por turma e planejamento das atividades'],
+];
+let marcados=[];try{marcados=JSON.parse(localStorage.getItem('frucal-passos')||'[]')}catch(e){}
+document.getElementById('check').innerHTML=PASSOS.map((p,i)=>`<label><input type="checkbox" data-i="${i}" ${marcados.includes(i)?'checked':''}><span>${p[0]}<small>${p[1]}</small></span></label>`).join('');
+function progresso(){const cks=[...document.querySelectorAll('#check input')];const n=cks.filter(c=>c.checked).length;
+  document.getElementById('pct').textContent=`${n} de ${cks.length}`;document.getElementById('barra').style.width=(n/cks.length*100)+'%';
+  try{localStorage.setItem('frucal-passos',JSON.stringify(cks.filter(c=>c.checked).map(c=>+c.dataset.i)))}catch(e){}}
+document.getElementById('check').addEventListener('change',progresso);progresso();
+
+/* ---------- navegação ---------- */
+const slides=[...document.querySelectorAll('.slide')];let atual=0;
+const pontos=document.getElementById('pontos');
+pontos.innerHTML=slides.map((_,i)=>`<button aria-label="Slide ${i+1}" onclick="ir(${i})"></button>`).join('');
+function ir(n){atual=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>{s.classList.toggle('ativo',i===atual);s.classList.toggle('antes',i<atual)});
+  [...pontos.children].forEach((p,i)=>p.classList.toggle('on',i===atual));
+  document.getElementById('cont').textContent=`${atual+1}/${slides.length}`;
+  document.getElementById('ant').disabled=atual===0;document.getElementById('prox').disabled=atual===slides.length-1;
+  document.body.dataset.slide=atual;fecha();tip.classList.remove('show');
+  try{history.replaceState(null,'','#'+(atual+1))}catch(e){}}
+document.getElementById('ant').onclick=()=>ir(atual-1);
+document.getElementById('prox').onclick=()=>ir(atual+1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('modal').classList.contains('on')){fecha();return}
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();ir(atual+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();ir(atual-1)}
+  if(e.key==='f'||e.key==='F')tela();});
+let tx=null;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>70&&!e.target.closest('.cal-wrap'))ir(atual+(dx<0?1:-1));tx=null});
+document.querySelectorAll('.flip').forEach(f=>f.addEventListener('click',()=>f.classList.toggle('virado')));
+
+/* tela cheia */
+function tela(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}
+document.getElementById('bFull').onclick=tela;
+document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;
+  document.getElementById('txtFull').textContent=on?'Sair da tela cheia':'Tela cheia';
+  document.getElementById('icoFull').innerHTML=on?'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>':'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'});
+/* PDF */
+document.getElementById('bPdf').onclick=()=>{const t=document.title;document.title='Proposta Colonia de Ferias Frucal';window.print();setTimeout(()=>document.title=t,500)};
+
+ir(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
+</script>
+</body>
+</html>
