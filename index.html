@@ -49,14 +49,23 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 @keyframes flutua{50%{transform:translateY(-24px) scale(1.06)}}
 
 /* ---------- capa ---------- */
-.capa{background:linear-gradient(120deg,rgba(10,35,66,.92) 0%,rgba(10,35,66,.7) 45%,rgba(28,93,153,.35)),url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1800&q=75') center/cover;color:#fff;align-items:center;text-align:center}
-.capa .logo{width:min(460px,82vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3));animation:entra 1s ease both}
-.capa h1{font-size:clamp(36px,5.4vw,72px);margin-top:22px;text-shadow:0 4px 18px rgba(0,0,0,.3)}
-.capa h1 span{color:var(--sol)}
-.capa p{font-size:clamp(16px,1.8vw,22px);margin-top:12px;opacity:.95}
-.capa .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
-.chip{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);padding:10px 18px;border-radius:999px;font-weight:800}
-.comecar{margin-top:34px}
+.capa{background:#fff;flex-direction:row;padding:0;justify-content:flex-start;align-items:stretch}
+.capa-txt{flex:0 0 46%;display:flex;flex-direction:column;justify-content:center;padding:0 5vw 0 7vw;animation:entra .9s ease both}
+.capa .logo{width:min(250px,60vw);margin-bottom:56px;margin-left:-6px}
+.capa .etiqueta{font-size:14px;letter-spacing:.25em}
+.capa h1{font-size:clamp(38px,4.6vw,68px);color:var(--marinho);line-height:1.05}
+.capa h1 span{color:var(--laranja)}
+.capa .linha{width:72px;height:4px;border-radius:4px;background:var(--sol);margin:30px 0 34px}
+.comecar{align-self:flex-start;background:none;border:0;cursor:pointer;font:600 15px 'Inter',sans-serif;color:var(--azul);padding:0}
+.comecar span{display:inline-block;transition:transform .2s}
+.comecar:hover span{transform:translateX(6px)}
+.capa-foto{flex:1;background:url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1600&q=75') center/cover;clip-path:polygon(9% 0,100% 0,100% 100%,0 100%)}
+@media (max-width:700px){
+  .slide.capa{flex-direction:column-reverse;padding:0;justify-content:flex-end}
+  .capa-txt{flex:1;padding:24px 16px 100px}
+  .capa .logo{margin-bottom:24px}
+  .capa-foto{flex:0 0 38vh;clip-path:none}
+}
 @keyframes entra{from{opacity:0;transform:translateY(16px)}}
 .sol-gira{transform-origin:90px 90px;animation:gira 40s linear infinite}
 @keyframes gira{to{transform:rotate(360deg)}}
@@ -228,7 +237,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
       </g>
       <!-- textos -->
       <text x="190" y="72" font-family="Poppins, Inter, sans-serif" font-weight="600" font-size="27" fill="#EE7B22" letter-spacing="2">COLÔNIA DE FÉRIAS</text>
-      <text x="188" y="128" font-family="Poppins, Inter, sans-serif" font-weight="700" font-size="54" fill="#0A2342" letter-spacing="3">FURUKAWA</text>
+      <text x="188" y="128" font-family="Poppins, Inter, sans-serif" font-weight="700" font-size="54" fill="#0A2342" letter-spacing="1">Furukawa</text>
       <!-- tracinhos coloridos -->
       <g>
         <rect x="190" y="144" width="74" height="8" rx="4" fill="#1C5D99"/>
@@ -257,15 +266,14 @@ details.ac .cx li{margin:4px 0 4px 16px}
 
   <!-- 1 CAPA -->
   <section class="slide capa ativo">
-    <svg class="logo" viewBox="0 0 520 180"><use href="#logo"/></svg>
-    <h1>Proposta <span>Colônia de Férias</span></h1>
-    <p>Duas semanas de muita diversão, criatividade e amizade para os filhos dos colaboradores</p>
-    <div class="chips">
-      <div class="chip">5 a 12 anos</div>
-      <div class="chip">8h às 17h</div>
-      <div class="chip">2 semanas</div>
+    <div class="capa-txt">
+      <svg class="logo" viewBox="0 0 520 180"><use href="#logo"/></svg>
+      <span class="etiqueta">Proposta</span>
+      <h1>Colônia de Férias<br><span>Furukawa</span></h1>
+      <div class="linha"></div>
+      <button class="comecar" onclick="ir(1)">Iniciar apresentação <span>→</span></button>
     </div>
-    <button class="btn comecar" onclick="ir(1)">Vamos começar! →</button>
+    <div class="capa-foto" role="img" aria-label="Crianças brincando com paraquedas colorido ao ar livre"></div>
   </section>
 
   <!-- 2 OBJETIVOS -->
