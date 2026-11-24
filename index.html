@@ -8,28 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sol:#F6B21B; --laranja:#EE7B22; --azul:#1C5D99; --marinho:#0A2342; --ceu:#9CC3E6;
-  --verde:#2A9D8F; --rosa:#E76F51; --roxo:#4F63C4; --creme:#F5F7FA; --texto:#1D2B3A;
-  --card:#ffffff; --sombra:0 8px 24px rgba(10,35,66,.12);
+  /* base nas cores do site da Furukawa (marinho #002F6C, azul #005EB8, fundo #F2FBFD) */
+  --marinho:#002F6C; --azul:#005EB8; --ceu:#CFE5F6; --pastel:#EAF4FB; --creme:#F4F8FC;
+  --verde:#2E9E5B; --sol:#F5B800; --texto:#1E2A3A;
+  --card:#ffffff; --sombra:0 8px 24px rgba(0,47,108,.12);
 }
-/* faixa colorida no topo: o toque lúdico */
-body::before{content:"";position:fixed;top:0;left:0;right:0;height:6px;z-index:60;
-  background:linear-gradient(90deg,var(--marinho) 0 40%,var(--azul) 40% 60%,var(--verde) 60% 75%,var(--sol) 75% 90%,var(--laranja) 90%)}
-h1,h2,h3{font-weight:700;letter-spacing:-.01em}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:'Inter',system-ui,sans-serif;color:var(--texto);background:var(--creme);overflow:hidden}
-h1,h2,h3,.titulo{font-family:'Poppins',sans-serif;line-height:1.05}
+h1,h2,h3{font-family:'Poppins',sans-serif;line-height:1.05;font-weight:700;letter-spacing:-.01em}
+/* faixa no topo */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:6px;z-index:60;
+  background:linear-gradient(90deg,var(--marinho) 0 45%,var(--azul) 45% 70%,var(--verde) 70% 87%,var(--sol) 87%)}
 
 /* ---------- barra superior ---------- */
-.topo{position:fixed;top:14px;right:16px;z-index:50;display:flex;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:800 15px 'Inter',sans-serif;
+.topo{position:fixed;top:16px;right:16px;z-index:50;display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:700 15px 'Inter',sans-serif;
   padding:11px 16px;border-radius:999px;background:#fff;color:var(--marinho);box-shadow:var(--sombra);transition:.2s}
-.btn:hover{transform:translateY(-2px);background:var(--sol)}
+.btn:hover{transform:translateY(-2px);background:var(--ceu)}
 .btn svg{width:20px;height:20px}
-.btn.prim{background:var(--laranja);color:#fff}
-.btn.prim:hover{background:var(--rosa)}
-.marca-mini{position:fixed;top:18px;left:16px;z-index:50;width:170px;transition:.3s;filter:drop-shadow(0 4px 10px rgba(10,35,66,.12))}
+.btn.prim{background:var(--azul);color:#fff}
+.btn.prim:hover{background:var(--marinho)}
+.marca-mini{position:fixed;top:18px;left:16px;z-index:50;width:170px;transition:.3s;filter:drop-shadow(0 4px 10px rgba(0,47,108,.12))}
 body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 
 /* ---------- slides ---------- */
@@ -38,163 +38,176 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
   opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .55s ease,transform .55s ease,visibility .55s;overflow-y:auto}
 .slide.ativo{opacity:1;visibility:visible;transform:none}
 .slide.antes{transform:translateX(-40px)}
-.slide h2{font-size:clamp(32px,4.6vw,58px);color:var(--marinho);margin-bottom:6px}
-.slide .sub{font-size:clamp(15px,1.5vw,20px);opacity:.8;margin-bottom:26px;max-width:900px}
-.etiqueta{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--laranja);margin-bottom:8px}
-
-/* fundo de bolinhas */
-.bolhas{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.bolhas span{position:absolute;border-radius:50%;opacity:.18;animation:flutua 9s ease-in-out infinite}
-@keyframes flutua{50%{transform:translateY(-24px) scale(1.06)}}
+.slide h2{font-size:clamp(30px,4vw,50px);color:var(--marinho);margin-bottom:6px}
+.slide .sub{font-size:clamp(15px,1.4vw,19px);opacity:.8;margin-bottom:26px;max-width:900px}
+.etiqueta{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--verde);margin-bottom:8px}
+.dica{margin-top:18px;font-size:14px;opacity:.65;font-weight:600}
 
 /* ---------- capa ---------- */
-.capa{background:#fff;flex-direction:row;padding:0;justify-content:flex-start;align-items:stretch}
+.capa{background:var(--pastel);flex-direction:row;padding:0;justify-content:flex-start;align-items:stretch}
 .capa-txt{flex:0 0 46%;display:flex;flex-direction:column;justify-content:center;padding:0 5vw 0 7vw;animation:entra .9s ease both}
-.capa .logo{width:min(250px,60vw);margin-bottom:56px;margin-left:-6px}
+.capa .logo{width:min(250px,60vw);margin-bottom:56px;margin-left:-6px;filter:drop-shadow(0 6px 16px rgba(0,47,108,.10))}
 .capa .etiqueta{font-size:14px;letter-spacing:.25em}
-.capa h1{font-size:clamp(32px,3.7vw,58px);color:var(--marinho);line-height:1.05}
-.capa h1 span{color:var(--laranja)}
-.capa .linha{width:72px;height:4px;border-radius:4px;background:var(--sol);margin:30px 0 34px}
+.capa h1{font-size:clamp(32px,3.7vw,58px);color:var(--marinho)}
+.capa h1 span{color:var(--azul)}
+.capa .linha{display:flex;gap:6px;margin:30px 0 34px}
+.capa .linha i{height:4px;border-radius:4px}
 .comecar{align-self:flex-start;background:none;border:0;cursor:pointer;font:600 15px 'Inter',sans-serif;color:var(--azul);padding:0}
 .comecar span{display:inline-block;transition:transform .2s}
 .comecar:hover span{transform:translateX(6px)}
 .capa-foto{flex:1;background:url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1600&q=75') center/cover;clip-path:polygon(9% 0,100% 0,100% 100%,0 100%)}
-@media (max-width:700px){
-  .slide.capa{flex-direction:column-reverse;padding:0;justify-content:flex-end}
-  .capa-txt{flex:1;padding:24px 16px 100px}
-  .capa .logo{margin-bottom:24px}
-  .capa-foto{flex:0 0 38vh;clip-path:none}
-}
 @keyframes entra{from{opacity:0;transform:translateY(16px)}}
 .sol-gira{transform-origin:90px 90px;animation:gira 40s linear infinite}
 @keyframes gira{to{transform:rotate(360deg)}}
 
-/* ---------- cards virar (objetivos) ---------- */
+/* ---------- objetivos (cartões que viram) ---------- */
 .grade{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .flip{perspective:1200px;height:300px;cursor:pointer}
 .flip .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
 .flip:hover .in,.flip.virado .in{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:var(--sombra)}
-.frente{background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:20px}
-.frente::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(2,48,71,.92),rgba(2,48,71,.05) 65%)}
+.frente{background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:22px}
+.frente::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,47,108,.94),rgba(0,47,108,.05) 65%)}
 .frente>*{position:relative}
-.frente .ico{font-size:34px}
-.frente h3{font-size:26px}
-.frente .grande{font:800 34px 'Poppins';color:var(--sol)}
-.frente small{opacity:.85;font-weight:700}
+.frente small{opacity:.85;font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+.frente .grande{font:700 32px 'Poppins';color:#fff;margin-top:4px;line-height:1.1}
+.frente .grande.menor{font-size:24px}
+.frente .traco{width:40px;height:4px;border-radius:4px;background:var(--sol);margin-top:12px}
 .verso{transform:rotateY(180deg);padding:24px;color:#fff;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:16px}
-.verso h3{font-size:24px}
+.verso h3{font-size:22px}
 .verso li{margin-left:18px;margin-bottom:4px}
-.dica{margin-top:18px;font-size:14px;opacity:.7;font-weight:700}
 
 /* ---------- atividades ---------- */
 .ativ{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .at{position:relative;border-radius:16px;overflow:hidden;height:210px;cursor:pointer;box-shadow:var(--sombra);background:#ccc center/cover;transition:transform .3s}
 .at:hover{transform:translateY(-6px)}
-.at::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,35,66,.92),transparent 60%);transition:.3s}
-.at:hover::after{background:linear-gradient(to top,rgba(10,35,66,.95),rgba(28,93,153,.35));box-shadow:inset 0 -5px 0 var(--laranja)}
+.at::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,47,108,.92),transparent 60%);transition:.3s}
+.at:hover::after{background:linear-gradient(to top,rgba(0,47,108,.95),rgba(0,94,184,.35));box-shadow:inset 0 -5px 0 var(--verde)}
 .at .t{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;color:#fff}
-.at .t b{font:800 22px 'Poppins';display:block}
-.at .t span{font-size:13px;font-weight:700;opacity:.9}
-.at .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--sol);color:var(--marinho);font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px}
-.at .mais{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--laranja);display:grid;place-items:center;font-weight:900;font-size:22px;transition:.3s}
+.at .t b{font:700 21px 'Poppins';display:block}
+.at .t span{font-size:13px;font-weight:600;opacity:.9}
+.at .mais{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--azul);display:grid;place-items:center;font-weight:800;font-size:22px;transition:.3s}
 .at:hover .mais{transform:rotate(90deg)}
+.at.destaque{outline:4px solid var(--sol);outline-offset:3px}
+.at .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--sol);color:var(--marinho);font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px}
 .faixa{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
-.faixa div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:10px 14px;font-weight:700;box-shadow:0 4px 14px rgba(2,48,71,.08)}
-.faixa div s{color:var(--rosa)}
+.faixa div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:10px 14px;font-weight:600;box-shadow:0 4px 14px rgba(0,47,108,.08)}
+.faixa .ok{color:var(--verde);font-weight:800}
+.faixa .no{color:#C0392B;font-weight:800}
 
 /* ---------- calendário ---------- */
 .cal-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.tog{border:2px solid var(--marinho);background:#fff;color:var(--marinho);font:800 14px 'Inter';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.2s}
+.tog{border:2px solid var(--marinho);background:#fff;color:var(--marinho);font:700 14px 'Inter';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.2s}
 .tog.on{background:var(--marinho);color:#fff}
 .tog.m.on{background:var(--verde);border-color:var(--verde)}
-.tog.M.on{background:var(--roxo);border-color:var(--roxo)}
-.cal-wrap{flex:none;overflow-x:auto;overflow-y:hidden;border-radius:18px;box-shadow:var(--sombra);background:#fff}
-table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:13.5px}
-.cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Poppins'}
-.cal th:first-child{width:96px}
-.cal td{padding:3px 5px;border-bottom:1px solid #eef2f5;vertical-align:middle}
-.cal td.h{font-weight:800;color:var(--marinho);text-align:center;background:#f5f9fc;white-space:nowrap;font-size:13px}
-.cel{border-radius:10px;padding:6px 9px;font-weight:700;line-height:1.2;cursor:help;transition:.2s;position:relative}
-.cal th{padding:8px!important}
-#cal-slide h2{font-size:clamp(28px,3.4vw,44px)}
-.cel:hover{transform:scale(1.04);box-shadow:0 6px 16px rgba(2,48,71,.18);z-index:3}
-.c-cafe{background:#FDF0D3}
-.c-rec{background:#E4EEF8}
-.c-alm{background:#ECEFF3}
-.c-fim{background:#FBE3D3}
-.c-pas{background:#DFF2EF;border:2px dashed var(--verde)}
-.c-enc{background:#FFF0C7;border:2px solid var(--sol)}
-.cel small{display:block;font-weight:700;opacity:.75;font-size:11.5px;margin-top:2px}
-.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;color:#fff;margin:2px 2px 0 0}
-.p-m{background:var(--verde)} .p-M{background:var(--roxo)}
+.tog.M.on{background:var(--azul);border-color:var(--azul)}
+.cal-wrap{flex:none;overflow-x:auto;overflow-y:hidden;border-radius:16px;box-shadow:var(--sombra);background:#fff}
+table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:14px}
+.cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:600 16px 'Poppins'}
+.cal th:first-child{width:110px}
+.cal td{padding:5px;border-bottom:1px solid #eef2f5;vertical-align:middle}
+.cal td.h{font-weight:700;color:var(--marinho);text-align:center;background:#f5f9fc;white-space:nowrap;font-size:13.5px}
+.cel{border-radius:10px;padding:10px 11px;font-weight:600;line-height:1.25;cursor:help;transition:.2s;position:relative}
+.cel.alto{min-height:74px;display:flex;flex-direction:column;justify-content:center}
+.cel:hover{transform:scale(1.03);box-shadow:0 6px 16px rgba(0,47,108,.18);z-index:3}
+.cel small{display:block;font-weight:500;opacity:.75;font-size:12px;margin-top:3px}
+.c-cafe{background:#FFF4D1}
+.c-rec{background:#E3EFFA}
+.c-alm{background:#EEF1F4}
+.c-fim{background:#E2F3E8}
+.c-pas{background:#FFF8E0;border:2px dashed var(--sol)}
+.c-enc{background:#FFEFB8;border:2px solid var(--sol)}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;color:#fff;margin-top:4px;align-self:flex-start}
+.p-m{background:var(--verde)} .p-M{background:var(--azul)}
 .apagado{opacity:.28;filter:grayscale(.7)}
-.legenda{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;font-weight:700;align-items:center}
+.legenda{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;font-weight:600;align-items:center}
 .legenda i{display:inline-block;width:16px;height:16px;border-radius:5px;vertical-align:middle;margin-right:5px}
-.obs{margin-top:10px;font-size:13.5px;background:#fff;border-left:5px solid var(--laranja);padding:10px 14px;border-radius:10px}
+.obs{margin-top:10px;font-size:13.5px;background:#fff;border-left:5px solid var(--sol);padding:10px 14px;border-radius:10px}
 #tip{position:fixed;z-index:80;max-width:280px;background:var(--marinho);color:#fff;padding:10px 13px;border-radius:12px;font-size:13.5px;
   pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;box-shadow:var(--sombra)}
 #tip.show{opacity:1;transform:none}
 #tip b{color:var(--sol)}
 
 /* ---------- complementos ---------- */
-.lista-ac{display:grid;gap:14px;align-items:start;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-details.ac{background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(2,48,71,.1);overflow:hidden;border-left:7px solid var(--azul)}
-details.ac:nth-child(2){border-color:var(--verde)} details.ac:nth-child(3){border-color:var(--laranja)}
-details.ac:nth-child(4){border-color:var(--rosa)} details.ac:nth-child(5){border-color:var(--roxo)} details.ac:nth-child(6){border-color:var(--sol)}
-details.ac summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:14px;font:800 19px 'Poppins'}
-details.ac summary::-webkit-details-marker{display:none}
-details.ac summary .e{font-size:30px}
-details.ac summary::after{content:"+";margin-left:auto;font-size:26px;color:var(--laranja);transition:.3s}
-details.ac[open] summary::after{transform:rotate(45deg)}
-details.ac .cx{padding:0 20px 18px 62px;font-size:15.5px}
-details.ac .cx li{margin:4px 0 4px 16px}
+.comp{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+.cp{position:relative;background:#fff;border-radius:16px;padding:22px 22px 20px;box-shadow:0 6px 20px rgba(0,47,108,.08);border-top:5px solid var(--azul);transition:.25s}
+.cp:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+.cp:nth-child(3n+2){border-top-color:var(--verde)} .cp:nth-child(3n){border-top-color:var(--marinho)}
+.cp.destaque{border-top-color:var(--sol);background:linear-gradient(180deg,#FFFBEA,#fff 55%)}
+.cp .ic{width:46px;height:46px;border-radius:12px;background:var(--pastel);color:var(--azul);display:grid;place-items:center;margin-bottom:12px}
+.cp .ic svg{width:26px;height:26px}
+.cp h3{font-size:19px;color:var(--marinho);margin-bottom:8px}
+.cp ul{list-style:none}
+.cp li{position:relative;padding-left:16px;margin:5px 0;font-size:14.5px;line-height:1.4}
+.cp li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--verde)}
+.cp .tag{position:absolute;top:18px;right:18px;background:var(--sol);color:var(--marinho);font-weight:800;font-size:11.5px;padding:4px 10px;border-radius:999px}
 
-/* ---------- próximos passos ---------- */
-.check{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.check label{display:flex;gap:12px;align-items:flex-start;background:#fff;padding:14px 16px;border-radius:14px;box-shadow:0 4px 14px rgba(2,48,71,.08);cursor:pointer;font-weight:700;transition:.2s}
-.check label:hover{transform:translateX(4px)}
-.check input{width:22px;height:22px;accent-color:var(--verde);flex:none;margin-top:1px}
-.check input:checked+span{text-decoration:line-through;opacity:.55}
-.check small{display:block;font-weight:600;opacity:.75}
-.barra{height:12px;background:#e6eef3;border-radius:999px;overflow:hidden;margin:6px 0 18px;max-width:520px}
-.barra div{height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--sol));transition:width .4s}
+/* ---------- investimento ---------- */
+.planos{display:grid;gap:16px;grid-template-columns:repeat(4,1fr)}
+.pl{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 6px 20px rgba(0,47,108,.08);border:2px solid transparent;cursor:pointer;transition:.25s;text-align:center;position:relative}
+.pl:hover{transform:translateY(-4px)}
+.pl.on{border-color:var(--azul);box-shadow:0 12px 30px rgba(0,94,184,.22);transform:translateY(-6px)}
+.pl .faixa-n{font:600 15px 'Poppins';color:var(--marinho)}
+.pl .min{font-size:12.5px;color:var(--verde);font-weight:700;min-height:18px;margin-top:2px}
+.pl .preco{font:700 44px 'Poppins';color:var(--azul);margin:12px 0 0;line-height:1}
+.pl .preco sup{font-size:18px;vertical-align:top;margin-right:3px;position:relative;top:6px}
+.pl .por{font-size:13px;opacity:.7;font-weight:600}
+.pl .mon{margin-top:14px;padding-top:12px;border-top:1px dashed #d5e2ee;font-size:13.5px;font-weight:600;color:var(--marinho)}
+.pl.on::after{content:"Faixa selecionada";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.sim{margin-top:26px;background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 6px 20px rgba(0,47,108,.08);display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:20px;align-items:center}
+.sim label{font-weight:700;color:var(--marinho);font-size:14px}
+.sim input[type=range]{width:100%;accent-color:var(--azul);margin-top:10px}
+.sim .num{font:700 26px 'Poppins';color:var(--marinho)}
+.sim .k small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.65;font-weight:700}
+.sim .k b{font:700 24px 'Poppins';color:var(--azul)}
+.sim .alerta{grid-column:1/-1;font-size:13.5px;font-weight:600;color:#9a6a00;background:#FFF6D6;padding:8px 12px;border-radius:10px;display:none}
+.regras{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
+.regras div{display:flex;align-items:center;gap:10px;background:var(--pastel);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;color:var(--marinho)}
+.regras svg{width:20px;height:20px;color:var(--verde);flex:none}
 
 /* ---------- final ---------- */
-.final{background:linear-gradient(120deg,rgba(10,35,66,.92),rgba(28,93,153,.6)),url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=1800&q=75') center/cover;color:#fff;text-align:center;align-items:center}
-.final h2{color:#fff;font-size:clamp(40px,6vw,80px)}
+.final{background:linear-gradient(120deg,rgba(0,47,108,.92),rgba(0,94,184,.6)),url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=1800&q=75') center/cover;color:#fff;text-align:center;align-items:center}
+.final h2{color:#fff;font-size:clamp(40px,6vw,76px)}
 
 /* ---------- modal ---------- */
-.modal{position:fixed;inset:0;z-index:90;background:rgba(2,48,71,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal{position:fixed;inset:0;z-index:90;background:rgba(0,47,108,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
 .modal.on{display:flex}
-.mbox{background:#fff;border-radius:26px;max-width:760px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
-@keyframes pop{from{transform:scale(.85);opacity:0}}
+.mbox{background:#fff;border-radius:20px;max-width:760px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .35s ease}
+@keyframes pop{from{transform:translateY(16px);opacity:0}}
 .mimg{height:240px;background:center/cover;position:relative}
-.mimg .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;font-size:22px;cursor:pointer;font-weight:900;color:var(--marinho)}
+.mimg .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;font-size:22px;cursor:pointer;font-weight:800;color:var(--marinho)}
 .mtx{padding:22px 26px 26px}
-.mtx h3{font-size:32px;color:var(--marinho)}
+.mtx h3{font-size:28px;color:var(--marinho)}
 .mtx p{margin:8px 0 12px;font-size:16px}
 .mtx li{margin:5px 0 5px 20px;font-size:15.5px}
-.mtx .aviso{background:#FFF3D6;border-radius:12px;padding:10px 14px;font-size:14.5px;font-weight:700;margin-top:12px}
+.mtx .aviso{background:#FFF6D6;border-radius:12px;padding:10px 14px;font-size:14.5px;font-weight:600;margin-top:12px}
 
 /* ---------- navegação ---------- */
 .nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;background:#fff;padding:8px 12px;border-radius:999px;box-shadow:var(--sombra)}
 .nav button.seta{width:40px;height:40px;border-radius:50%;border:0;background:var(--marinho);color:#fff;font-size:20px;cursor:pointer;transition:.2s}
-.nav button.seta:hover{background:var(--laranja)}
+.nav button.seta:hover{background:var(--azul)}
 .nav button.seta:disabled{opacity:.3;cursor:default}
 .pontos{display:flex;gap:7px}
 .pontos button{width:11px;height:11px;border-radius:999px;border:0;background:#c9d6df;cursor:pointer;transition:.3s;padding:0}
-.pontos button.on{width:30px;background:var(--laranja)}
-.contador{font-weight:800;font-size:13px;color:var(--marinho);min-width:42px;text-align:center}
+.pontos button.on{width:30px;background:var(--azul)}
+.contador{font-weight:700;font-size:13px;color:var(--marinho);min-width:42px;text-align:center}
 
+@media (max-width:1000px){
+  .comp{grid-template-columns:repeat(2,1fr)}
+  .planos{grid-template-columns:repeat(2,1fr)}
+  .sim{grid-template-columns:1fr 1fr}
+}
 @media (max-width:700px){
   .btn span{display:none}
   .btn{padding:11px}
-  .marca-mini{width:86px}
+  .marca-mini{width:120px}
   .slide{padding:76px 16px 90px;justify-content:flex-start}
+  .slide.capa{flex-direction:column-reverse;padding:0;justify-content:flex-end}
+  .capa-txt{flex:1;padding:24px 16px 100px}
+  .capa .logo{margin-bottom:24px}
+  .capa-foto{flex:0 0 38vh;clip-path:none}
   .flip{height:260px}
-  details.ac .cx{padding-left:20px}
+  .comp,.planos,.sim{grid-template-columns:1fr}
 }
 
 /* ---------- impressão / PDF ---------- */
@@ -202,15 +215,14 @@ details.ac .cx li{margin:4px 0 4px 16px}
   @page{size:A4 landscape;margin:0}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body{overflow:visible;background:#fff}
-  .topo,.nav,.marca-mini,#tip,.modal,.dica,.comecar{display:none!important}
+  .topo,.nav,.marca-mini,#tip,.modal,.dica,.comecar,.cal-ctrl{display:none!important}
   .deck{height:auto}
   .slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;transform:none!important;
     height:210mm;width:297mm;page-break-after:always;break-after:page;overflow:hidden;padding:14mm 14mm}
+  .slide.capa{padding:0}
   .flip .in{transform:none!important}
   .flip .verso{display:none}
-  details.ac .cx{display:block}
-  table.cal{font-size:10.5px;min-width:0}
-  .cel{padding:5px 6px;min-height:0}
+  table.cal{font-size:11px;min-width:0}
   .ativ .at{height:150px}
   .apagado{opacity:1;filter:none}
 }
@@ -222,30 +234,31 @@ details.ac .cx li{margin:4px 0 4px 16px}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="logo" viewBox="0 0 520 180">
-      <!-- selo branco -->
       <rect x="2" y="2" width="516" height="176" rx="26" fill="#fff"/>
-      <!-- sol -->
       <g transform="translate(6,0)">
         <g class="sol-gira">
-          <g stroke="#F6B21B" stroke-width="9" stroke-linecap="round">
+          <g stroke="#F5B800" stroke-width="9" stroke-linecap="round">
             <path d="M90 22v16M90 142v16M22 90h16M142 90h16M42 42l11 11M127 127l11 11M138 42l-11 11M53 127l-11 11"/>
           </g>
         </g>
-        <circle cx="90" cy="90" r="40" fill="#F6B21B"/>
-        <path d="M74 96 q16 16 32 0" stroke="#0A2342" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <circle cx="77" cy="80" r="5" fill="#0A2342"/><circle cx="103" cy="80" r="5" fill="#0A2342"/>
+        <circle cx="90" cy="90" r="40" fill="#F5B800"/>
+        <path d="M74 96 q16 16 32 0" stroke="#002F6C" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="77" cy="80" r="5" fill="#002F6C"/><circle cx="103" cy="80" r="5" fill="#002F6C"/>
       </g>
-      <!-- textos -->
-      <text x="190" y="72" font-family="Poppins, Inter, sans-serif" font-weight="600" font-size="27" fill="#EE7B22" letter-spacing="2">COLÔNIA DE FÉRIAS</text>
-      <text x="188" y="128" font-family="Poppins, Inter, sans-serif" font-weight="700" font-size="54" fill="#0A2342" letter-spacing="1">Furukawa</text>
-      <!-- tracinhos coloridos -->
-      <g>
-        <rect x="190" y="144" width="74" height="8" rx="4" fill="#1C5D99"/>
-        <rect x="270" y="144" width="44" height="8" rx="4" fill="#2A9D8F"/>
-        <rect x="320" y="144" width="30" height="8" rx="4" fill="#F6B21B"/>
-        <rect x="356" y="144" width="18" height="8" rx="4" fill="#EE7B22"/>
-      </g>
+      <text x="190" y="72" font-family="Poppins, Inter, sans-serif" font-weight="600" font-size="27" fill="#005EB8" letter-spacing="2">COLÔNIA DE FÉRIAS</text>
+      <text x="188" y="128" font-family="Poppins, Inter, sans-serif" font-weight="700" font-size="54" fill="#002F6C" letter-spacing="1">Furukawa</text>
+      <rect x="190" y="144" width="90" height="8" rx="4" fill="#005EB8"/>
+      <rect x="286" y="144" width="50" height="8" rx="4" fill="#2E9E5B"/>
+      <rect x="342" y="144" width="28" height="8" rx="4" fill="#F5B800"/>
     </symbol>
+    <!-- ícones de linha -->
+    <symbol id="i-bus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 11h18M8 4v7M16 4v7"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9h6M7 12h10"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 5.5 2.5 10l3 1.2V21h13v-9.8l3-1.2L20 5.5 16 3a4 4 0 0 1-8 0z"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 4.8"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
   </defs>
 </svg>
 
@@ -270,7 +283,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
       <svg class="logo" viewBox="0 0 520 180"><use href="#logo"/></svg>
       <span class="etiqueta">Proposta</span>
       <h1>Colônia de Férias<br><span>Furukawa</span></h1>
-      <div class="linha"></div>
+      <div class="linha"><i style="width:56px;background:var(--azul)"></i><i style="width:28px;background:var(--verde)"></i><i style="width:14px;background:var(--sol)"></i></div>
       <button class="comecar" onclick="ir(1)">Iniciar apresentação <span>→</span></button>
     </div>
     <div class="capa-foto" role="img" aria-label="Crianças brincando com paraquedas colorido ao ar livre"></div>
@@ -278,14 +291,13 @@ details.ac .cx li{margin:4px 0 4px 16px}
 
   <!-- 2 OBJETIVOS -->
   <section class="slide">
-    <div class="bolhas"><span style="width:220px;height:220px;background:var(--sol);top:-60px;right:8%"></span><span style="width:140px;height:140px;background:var(--azul);bottom:40px;left:-30px;animation-delay:-3s"></span></div>
     <span class="etiqueta">Visão geral</span>
     <h2>Nossos objetivos</h2>
     <p class="sub">Passe o mouse (ou toque) em cada cartão para ver os detalhes.</p>
     <div class="grade">
       <div class="flip"><div class="in">
         <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=700&q=70')">
-          <div class="ico">👧🧒</div><small>Público-alvo</small><div class="grande">5 a 12 anos</div></div>
+          <small>Público-alvo</small><div class="grande">5 a 12 anos</div><div class="traco"></div></div>
         <div class="face verso" style="background:var(--verde)">
           <h3>Público-alvo</h3>
           <p>Crianças de <b>5 a 12 anos</b>, divididas em duas turmas para atividades adequadas a cada idade:</p>
@@ -293,53 +305,50 @@ details.ac .cx li{margin:4px 0 4px 16px}
       </div></div>
       <div class="flip"><div class="in">
         <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1533222481259-ce20eda1e20b?w=700&q=70')">
-          <div class="ico">⏰</div><small>Horário</small><div class="grande">8h às 17h</div></div>
+          <small>Horário</small><div class="grande">8h às 17h</div><div class="traco"></div></div>
         <div class="face verso" style="background:var(--azul)">
           <h3>Horário de aplicação</h3>
           <ul><li>Recepção e café da manhã a partir das <b>8h</b></li><li>Almoço escalonado por turma</li><li>Lanche da tarde e atividades finais até as <b>17h</b></li></ul></div>
       </div></div>
       <div class="flip"><div class="in">
         <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1627764940620-90393d0e8c34?w=700&q=70')">
-          <div class="ico">📅</div><small>Duração</small><div class="grande">2 semanas</div></div>
-        <div class="face verso" style="background:var(--laranja)">
+          <small>Duração</small><div class="grande">2 semanas</div><div class="traco"></div></div>
+        <div class="face verso" style="background:var(--marinho)">
           <h3>Duração</h3>
-          <p><b>Duas semaninhas</b> de segunda a sexta, com uma programação que se repete e ganha momentos especiais:</p>
-          <ul><li>Passeios na quarta e na quinta</li><li>Encerramento festivo na sexta</li></ul></div>
+          <p><b>Duas semanas</b>, de segunda a sexta, com uma programação que se repete e ganha momentos especiais:</p>
+          <ul><li>Passeio na quarta e na quinta (se viável)</li><li>Encerramento festivo na sexta</li></ul></div>
       </div></div>
       <div class="flip"><div class="in">
         <div class="face frente" style="background-image:url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=700&q=70')">
-          <div class="ico">🎨</div><small>Atividades</small><div class="grande">Criatividade</div></div>
-        <div class="face verso" style="background:var(--rosa)">
+          <small>Atividades</small><div class="grande menor">Recreativas e com criatividade</div><div class="traco"></div></div>
+        <div class="face verso" style="background:#1B4F8A">
           <h3>O que prevemos</h3>
           <ul><li>Atividades recreativas</li><li>Oficinas</li><li>Recreadores com brincadeiras variadas</li></ul>
-          <p>Tudo <b>sem aparelhos tecnológicos</b> e sem materiais difíceis de conseguir — com foco na proatividade e criatividade dos monitores.</p></div>
+          <p>Tudo <b>sem aparelhos tecnológicos</b> e sem materiais difíceis de conseguir, com foco na proatividade e na criatividade dos monitores.</p></div>
       </div></div>
     </div>
   </section>
 
   <!-- 3 ATIVIDADES -->
   <section class="slide">
-    <div class="bolhas"><span style="width:180px;height:180px;background:var(--rosa);top:30px;right:-40px"></span></div>
     <span class="etiqueta">Atividades com os monitores</span>
     <h2>O que vamos propor</h2>
     <div class="faixa">
-      <div>✅ Criatividade dos monitores</div>
-      <div>✅ Materiais simples</div>
-      <div>🚫 <s>Celulares e tablets</s></div>
-      <div>🚫 <s>Equipamentos caros</s></div>
+      <div><span class="ok">✓</span> Criatividade dos monitores</div>
+      <div><span class="ok">✓</span> Materiais simples</div>
+      <div><span class="no">✕</span> Celulares e tablets</div>
+      <div><span class="no">✕</span> Equipamentos caros</div>
     </div>
     <div class="ativ" id="ativ"></div>
-    <p class="dica">👆 Clique em um cartão para ver mais informações.</p>
+    <p class="dica">Clique em um cartão para ver mais informações.</p>
   </section>
 
   <!-- 4 CALENDÁRIO -->
-  <section class="slide" id="cal-slide" style="justify-content:flex-start;padding-top:80px">
+  <section class="slide" id="cal-slide" style="justify-content:flex-start;padding-top:84px">
     <span class="etiqueta">Programação semanal</span>
     <h2>Calendário de atividades</h2>
+    <p class="sub" style="margin-bottom:14px">A mesma programação se repete nas duas semanas. Passe o mouse nos horários para ver os detalhes.</p>
     <div class="cal-ctrl">
-      <button class="tog on" data-sem="1">Semana 1</button>
-      <button class="tog" data-sem="2">Semana 2</button>
-      <span style="width:14px"></span>
       <b style="font-size:14px">Destacar turma:</b>
       <button class="tog on" data-t="todas">Todas</button>
       <button class="tog m" data-t="m">Menores (5–8)</button>
@@ -347,52 +356,77 @@ details.ac .cx li{margin:4px 0 4px 16px}
     </div>
     <div class="cal-wrap"><table class="cal" id="cal"></table></div>
     <div class="legenda">
-      <span><i style="background:#FFE8B3"></i>Recepção / café</span>
-      <span><i style="background:#D6EFF6"></i>Atividades recreativas</span>
-      <span><i style="background:#E4E4E4"></i>Almoço</span>
-      <span><i style="background:#FFD6C2"></i>Atividades finais + lanche</span>
-      <span><i style="background:#C9F2E8;border:2px dashed var(--verde)"></i>Passeio*</span>
-      <span><i style="background:#FFE066;border:2px solid var(--rosa)"></i>Encerramento</span>
+      <span><i style="background:#FFF4D1"></i>Recepção / café</span>
+      <span><i style="background:#E3EFFA"></i>Atividades recreativas</span>
+      <span><i style="background:#EEF1F4"></i>Almoço</span>
+      <span><i style="background:#E2F3E8"></i>Atividades finais + lanche</span>
+      <span><i style="background:#FFF8E0;border:2px dashed var(--sol)"></i>Passeio (opcional)*</span>
+      <span><i style="background:#FFEFB8;border:2px solid var(--sol)"></i>Encerramento</span>
     </div>
-    <div class="obs"><b>* Passeio:</b> verificar valores e se é possível realizar passeio externo — seria um diferencial da colônia de férias. Enquanto uma turma está no passeio ou no encerramento, a outra segue com as atividades recreativas.</div>
+    <div class="obs"><b>* Passeio (opcional):</b> sujeito à verificação de valores e à viabilidade de um passeio externo. Enquanto uma turma está no passeio ou no encerramento, a outra segue com as atividades recreativas.</div>
   </section>
 
   <!-- 5 COMPLEMENTOS -->
   <section class="slide">
-    <div class="bolhas"><span style="width:200px;height:200px;background:var(--verde);bottom:-50px;right:10%"></span></div>
     <span class="etiqueta">Organização e opcionais</span>
     <h2>Complementos da proposta</h2>
-    <p class="sub">Clique em cada item para abrir os detalhes.</p>
-    <div class="lista-ac">
-      <details class="ac"><summary><span class="e">🚌</span>Passeio (opcional)</summary>
-        <div class="cx"><p>De acordo com a aceitação e o <b>valor da inscrição</b>.</p><ul><li>Seria um <b>chamariz</b> para as inscrições e adesão das famílias</li><li>Quarta: menores (5–8) · Quinta: maiores (9–12)</li><li>Verificar valores, transporte e autorização dos pais</li></ul></div></details>
-      <details class="ac"><summary><span class="e">🎬</span>Dia de cinema (opcional)</summary>
-        <div class="cx"><ul><li>Verificar se existe na empresa um <b>auditório ou sala de reuniões adaptável</b></li><li>Projetor/TV, almofadas no chão e <b>pipoca</b></li><li>Filmes com classificação livre</li></ul></div></details>
-      <details class="ac"><summary><span class="e">🔗</span>Tudo linkado para os pais</summary>
-        <div class="cx"><ul><li>Divulgar aos pais tudo o que será oferecido</li><li>Criar, se possível, uma <b>página de acompanhamento das atividades</b> no site da associação/clube (caso exista)</li><li>Fotos do dia, cardápio e avisos</li></ul></div></details>
-      <details class="ac"><summary><span class="e">👕</span>Camisetas ou coletes — crianças</summary>
-        <div class="cx"><ul><li>Peças de <b>destaque</b> (cores vivas) para usar no dia a dia</li><li>Facilita a identificação e a segurança</li><li>Cor diferente por turma (5–8 e 9–12)</li><li>Viram lembrança da colônia 💛</li></ul></div></details>
-      <details class="ac"><summary><span class="e">🦺</span>Coletes ou camisetas — monitores</summary>
-        <div class="cx"><ul><li>Identificação rápida dos monitores pelas crianças e pais</li><li>Cor exclusiva da equipe</li></ul></div></details>
-      <details class="ac"><summary><span class="e">🎉</span>Encerramento especial</summary>
-        <div class="cx"><ul><li>🍭 Algodão doce</li><li>🍿 Pipoca</li><li>🏰 Infláveis</li><li>🤸 Cama elástica</li><li>Sexta: manhã para os maiores, tarde para os menores</li></ul></div></details>
+    <p class="sub">Itens que completam a experiência das crianças e a comunicação com as famílias.</p>
+    <div class="comp">
+      <div class="cp destaque"><span class="tag">Sujeito a viabilidade</span>
+        <div class="ic"><svg><use href="#i-bus"/></svg></div>
+        <h3>Passeio (opcional)</h3>
+        <ul><li>De acordo com a aceitação e o valor da inscrição</li><li>Diferencial para atrair as inscrições</li><li>Quarta: menores (5–8) · Quinta: maiores (9–12)</li></ul></div>
+      <div class="cp">
+        <div class="ic"><svg><use href="#i-film"/></svg></div>
+        <h3>Dia de cinema</h3>
+        <ul><li>Auditório ou sala de reuniões adaptável na empresa</li><li>Projetor ou TV, almofadas e pipoca</li><li>Filmes com classificação livre</li></ul></div>
+      <div class="cp">
+        <div class="ic"><svg><use href="#i-web"/></svg></div>
+        <h3>Comunicação com os pais</h3>
+        <ul><li>Tudo o que será oferecido, divulgado aos pais</li><li>Página de acompanhamento no site da associação ou clube, se houver</li><li>Fotos, cardápio e avisos</li></ul></div>
+      <div class="cp">
+        <div class="ic"><svg><use href="#i-shirt"/></svg></div>
+        <h3>Camisetas ou coletes — crianças</h3>
+        <ul><li>Cores de destaque para o uso no dia a dia</li><li>Facilitam a identificação e a segurança</li><li>Uma cor para cada turma (5–8 e 9–12)</li></ul></div>
+      <div class="cp">
+        <div class="ic"><svg><use href="#i-team"/></svg></div>
+        <h3>Coletes ou camisetas — equipe</h3>
+        <ul><li>Identificação rápida dos monitores</li><li>Cor exclusiva da equipe</li></ul></div>
+      <div class="cp">
+        <div class="ic"><svg><use href="#i-star"/></svg></div>
+        <h3>Encerramento especial</h3>
+        <ul><li>Algodão doce, pipoca, infláveis e cama elástica</li><li>Sexta de manhã: maiores (9–12)</li><li>Sexta à tarde: menores (5–8)</li></ul></div>
     </div>
   </section>
 
-  <!-- 6 PRÓXIMOS PASSOS -->
+  <!-- 6 INVESTIMENTO -->
   <section class="slide">
-    <span class="etiqueta">Para viabilizar</span>
-    <h2>Próximos passos</h2>
-    <p class="sub">Marque conforme os itens forem resolvidos: <b id="pct">0 de 0</b></p>
-    <div class="barra"><div id="barra"></div></div>
-    <div class="check" id="check"></div>
+    <span class="etiqueta">Investimento</span>
+    <h2>Valores por criança</h2>
+    <p class="sub">Quanto mais crianças confirmadas, menor o valor por criança. Clique em uma faixa ou use o simulador.</p>
+    <div class="planos" id="planos"></div>
+    <div class="sim">
+      <div>
+        <label for="qtd">Crianças confirmadas: <span class="num" id="qtdTxt">50</span></label>
+        <input type="range" id="qtd" min="30" max="200" value="50">
+      </div>
+      <div class="k"><small>Valor por criança</small><b id="vUn">R$ 399</b></div>
+      <div class="k"><small>Monitores</small><b id="vMon">5</b></div>
+      <div class="k"><small>Total estimado</small><b id="vTot">R$ 19.950</b></div>
+      <div class="alerta" id="alerta">Abaixo do mínimo: a colônia só acontece com pelo menos 40 crianças confirmadas.</div>
+    </div>
+    <div class="regras">
+      <div><svg><use href="#i-check"/></svg>Mínimo de 40 crianças confirmadas para a colônia acontecer</div>
+      <div><svg><use href="#i-check"/></svg>Sempre 1 monitor para cada 10 crianças</div>
+      <div><svg><use href="#i-check"/></svg>Limite de 200 crianças</div>
+    </div>
   </section>
 
   <!-- 7 FINAL -->
   <section class="slide final">
     <svg class="logo" style="width:min(340px,70vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3))" viewBox="0 0 520 180"><use href="#logo"/></svg>
-    <h2>Obrigado!</h2>
-    <p style="font-size:clamp(16px,1.8vw,22px);margin-top:10px">Vamos juntos fazer as férias mais divertidas do ano? ☀️</p>
+    <h2 style="margin-top:28px">Obrigado!</h2>
+    <p style="font-size:clamp(16px,1.8vw,22px);margin-top:10px">Vamos juntos fazer as férias mais divertidas do ano?</p>
   </section>
 </main>
 
@@ -411,94 +445,77 @@ const IMG = id => `https://images.unsplash.com/photo-${id}?w=900&q=70`;
 
 /* ---------- atividades ---------- */
 const ATIV = [
-  {t:'Cinema', s:'Sessão com pipoca', tag:'Opcional', img:'1620177088258-c84147ee601f', e:'🎬',
+  {t:'Cinema', s:'Sessão com pipoca', img:'1620177088258-c84147ee601f',
    p:'Um dia de cinema para as crianças, com filmes de classificação livre e muita pipoca.',
-   l:['Verificar se temos na empresa um auditório ou sala de reuniões que possa ser adaptada','Almofadas/tatames no chão para um clima aconchegante','Pipoca para todos'],
-   a:'Opcional: depende de espaço adequado dentro da empresa.'},
-  {t:'Caça ao tesouro', s:'Pistas e trabalho em equipe', img:'1761839262867-af53d08b0eb5', e:'🗺️',
+   l:['Verificar se temos na empresa um auditório ou sala de reuniões que possa ser adaptada','Almofadas ou tatames no chão para um clima aconchegante','Pipoca para todos']},
+  {t:'Caça ao tesouro', s:'Pistas e trabalho em equipe', img:'1761839262867-af53d08b0eb5',
    p:'As crianças seguem pistas e desafios espalhados pelo espaço até encontrar o tesouro.',
-   l:['Mapas e pistas feitos pelos monitores','Equipes misturando idades próximas','Estimula raciocínio, cooperação e movimento']},
-  {t:'Rua do Lazer', s:'Brincadeiras de rua', img:'1655009316723-e4af5fe7afe1', e:'🛴',
+   l:['Mapas e pistas feitos pelos monitores','Equipes com idades próximas','Estimula raciocínio, cooperação e movimento']},
+  {t:'Rua do Lazer', s:'Brincadeiras de rua', img:'1655009316723-e4af5fe7afe1',
    p:'Um espaço com estações de brincadeiras clássicas, como nas ruas de antigamente.',
    l:['Amarelinha, pular corda, elástico, bambolê','Corrida do saco, ovo na colher, cabo de guerra','Pintura de rosto e jogos com giz no chão']},
-  {t:'Oficinas', s:'Arte e trabalhos manuais', img:'1613950190144-4f2a84c75e8c', e:'✂️',
+  {t:'Oficinas', s:'Arte e trabalhos manuais', img:'1613950190144-4f2a84c75e8c',
    p:'Oficinas criativas com materiais simples e fáceis de conseguir.',
    l:['Desenho, pintura, colagem e dobradura','Brinquedos com materiais recicláveis','Massinha caseira e fantoches']},
-  {t:'Brincadeiras dirigidas', s:'Recreadores em ação', img:'1776243773206-a29b683c97fb', e:'🤸',
+  {t:'Brincadeiras dirigidas', s:'Recreadores em ação', img:'1776243773206-a29b683c97fb',
    p:'Jogos coletivos conduzidos pelos monitores, adaptados para cada faixa etária.',
    l:['Queimada, pega-pega, estátua, esconde-esconde','Gincanas e circuitos motores','Dança, música e teatro']},
-  {t:'Encerramento especial', s:'Festa de fechamento', tag:'Sexta', img:'1509666537727-9154b6962292', e:'🎉',
+  {t:'Encerramento especial', s:'Festa de fechamento', img:'1509666537727-9154b6962292',
    p:'Uma grande festa para fechar cada semana com chave de ouro.',
-   l:['🍭 Algodão doce','🍿 Pipoca','🏰 Infláveis','🤸 Cama elástica'],
-   a:'Manhã de sexta: maiores (9–12) · Tarde de sexta: menores (5–8).'},
-  {t:'Passeio', s:'Atividade externa', tag:'Opcional*', img:'1761839258289-72f12b0de058', e:'🚌',
-   p:'Um passeio externo seria o grande diferencial da colônia — e um chamariz para as inscrições.',
+   l:['Algodão doce','Pipoca','Infláveis','Cama elástica'],
+   a:'Sexta de manhã: maiores (9–12) · Sexta à tarde: menores (5–8).'},
+  {t:'Passeio', s:'Atividade externa', tag:'Se for possível', destaque:true, img:'1761839258289-72f12b0de058',
+   p:'Um passeio externo seria o grande diferencial da colônia e ajudaria a atrair as inscrições.',
    l:['Quarta de manhã: menores (5–8)','Quinta de manhã: maiores (9–12)','De acordo com a aceitação e o valor da inscrição'],
-   a:'* Verificar valores e se é possível realizar o passeio externo.'},
+   a:'Sujeito à verificação de valores e à viabilidade do passeio externo.'},
 ];
 document.getElementById('ativ').innerHTML = ATIV.map((a,i)=>`
-  <div class="at" style="background-image:url('${IMG(a.img)}')" onclick="abre(${i})" tabindex="0" onkeydown="if(event.key==='Enter')abre(${i})">
+  <div class="at${a.destaque?' destaque':''}" style="background-image:url('${IMG(a.img)}')" onclick="abre(${i})" tabindex="0" onkeydown="if(event.key==='Enter')abre(${i})">
     ${a.tag?`<span class="tag">${a.tag}</span>`:''}<span class="mais">+</span>
-    <div class="t"><b>${a.e} ${a.t}</b><span>${a.s}</span></div></div>`).join('');
+    <div class="t"><b>${a.t}</b><span>${a.s}</span></div></div>`).join('');
 function abre(i){const a=ATIV[i];
   document.getElementById('mImg').style.backgroundImage=`url('${IMG(a.img).replace('w=900','w=1200')}')`;
-  document.getElementById('mTx').innerHTML=`<h3>${a.e} ${a.t}</h3><p>${a.p}</p><ul>${a.l.map(x=>`<li>${x}</li>`).join('')}</ul>${a.a?`<div class="aviso">${a.a}</div>`:''}`;
+  document.getElementById('mTx').innerHTML=`<h3>${a.t}</h3><p>${a.p}</p><ul>${a.l.map(x=>`<li>${x}</li>`).join('')}</ul>${a.a?`<div class="aviso">${a.a}</div>`:''}`;
   document.getElementById('modal').classList.add('on');}
 function fecha(){document.getElementById('modal').classList.remove('on')}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')fecha()});
 
-/* ---------- calendário ---------- */
+/* ---------- calendário (blocos de horário) ---------- */
 const DIAS=['Segunda','Terça','Quarta','Quinta','Sexta'];
-const REC={c:'c-rec',t:'Atividades recreativas',d:'Atividades recreativas com os monitores (brincadeiras, oficinas, gincanas).'};
-const cel=(c,t,d,turma)=>({c,t,d,turma});
-function grade(){
-  const linhas=[
-    ['08:00 – 09:00', ()=>cel('c-cafe','Recepção das crianças + café da manhã','Chegada, boas-vindas e café da manhã para todas as turmas.')],
-    ['09:00 – 10:00', d=>manha(d)],
-    ['10:00 – 11:00', d=>manha(d)],
-    ['11:00 – 11:30', d=>manha(d)],
-    ['11:30 – 13:00', ()=>cel('c-alm','Almoço',`<b>11:30–12:30</b> menores (5–8)<br><b>12:00–13:00</b> maiores (9–12)`,'alm')],
-    ['13:00 – 14:00', d=>tarde(d,0)],
-    ['14:00 – 15:00', d=>tarde(d,1)],
-    ['15:00 – 16:00', d=>tarde(d,2)],
-    ['16:00 – 17:00', ()=>cel('c-fim','Atividades finais do dia + lanche da tarde','Fechamento do dia, lanche da tarde e saída das crianças.')],
-  ];
-  return linhas;
-}
-function manha(d){
-  if(d===2) return cel('c-pas','Atividades recreativas / Passeio*','<b>Passeio*:</b> menores (5–8)<br>Maiores seguem nas atividades recreativas.','m');
-  if(d===3) return cel('c-pas','Atividades recreativas / Passeio*','<b>Passeio*:</b> maiores (9–12)<br>Menores seguem nas atividades recreativas.','M');
-  if(d===4) return cel('c-enc','Encerramento da semana — maiores','<b>09:00–11:30</b> encerramento da colônia para os maiores (9–12).<br>Menores seguem nas atividades recreativas.','M');
-  return cel(REC.c,REC.t,REC.d);
-}
-function tarde(d,i){
-  if(d===4){
-    if(i===0) return cel('c-rec','Atividades recreativas + <br>Encerramento menores (13:30)','<b>13:00–13:30</b> atividades recreativas<br><b>13:30–15:30</b> encerramento dos menores (5–8).','m');
-    if(i===1) return cel('c-enc','Encerramento da semana — menores','<b>13:30–15:30</b> encerramento da colônia para os menores (5–8).<br>Maiores seguem nas atividades recreativas.','m');
-    return cel('c-enc','Encerramento menores (até 15:30) + recreação','<b>até 15:30</b> encerramento dos menores<br><b>15:30–16:00</b> atividades recreativas.','m');
-  }
-  return cel(REC.c,REC.t,REC.d);
-}
-let SEM=1, TURMA='todas';
+const cel=(c,t,d,turma,sub)=>({c,t,d,turma,sub});
+const REC=()=>cel('c-rec','Atividades recreativas','Atividades recreativas com os monitores: brincadeiras, oficinas, gincanas.');
+const LINHAS=[
+  ['08:00 – 09:00', ()=>cel('c-cafe','Recepção das crianças + café da manhã','Chegada, boas-vindas e café da manhã para todas as turmas.')],
+  ['09:00 – 11:30', d=>{
+    if(d===2) return cel('c-pas','Atividades recreativas / Passeio (opcional)*','<b>Passeio (opcional)*:</b> menores (5–8).<br>Os maiores seguem nas atividades recreativas.','m');
+    if(d===3) return cel('c-pas','Atividades recreativas / Passeio (opcional)*','<b>Passeio (opcional)*:</b> maiores (9–12).<br>Os menores seguem nas atividades recreativas.','M');
+    if(d===4) return cel('c-enc','Encerramento da semana — maiores','<b>09:00–11:30:</b> encerramento da colônia para os maiores (9–12).<br>Os menores seguem nas atividades recreativas.','M');
+    return REC();}],
+  ['11:30 – 13:00', ()=>cel('c-alm','Almoço','<b>11:30–12:30:</b> menores (5–8)<br><b>12:00–13:00:</b> maiores (9–12)','alm','11:30 menores · 12:00 maiores')],
+  ['13:00 – 16:00', d=>{
+    if(d===4) return cel('c-enc','Encerramento da semana — menores','<b>13:30–15:30:</b> encerramento da colônia para os menores (5–8).<br>Os maiores seguem nas atividades recreativas.','m','13:30 às 15:30');
+    return REC();}],
+  ['16:00 – 17:00', ()=>cel('c-fim','Atividades finais do dia + lanche da tarde','Fechamento do dia, lanche da tarde e saída das crianças.')],
+];
+let TURMA='todas';
 function desenha(){
-  const L=grade();
-  let h=`<tr><th>Horário</th>${DIAS.map((d,i)=>`<th>${d}<br><small style="font:600 12px Inter;opacity:.75">Semana ${SEM}</small></th>`).join('')}</tr>`;
-  L.forEach(([hr,f])=>{
+  let h=`<tr><th>Horário</th>${DIAS.map(d=>`<th>${d}</th>`).join('')}</tr>`;
+  LINHAS.forEach(([hr,f])=>{
+    const alto = hr.startsWith('09')||hr.startsWith('13');
     h+=`<tr><td class="h">${hr}</td>`;
     DIAS.forEach((_,d)=>{const c=f(d);
-      let pills='';
-      if(c.turma==='m')pills='<span class="pill p-m">5–8 anos</span>';
-      if(c.turma==='M')pills='<span class="pill p-M">9–12 anos</span>';
+      let pill='';
+      if(c.turma==='m')pill='<span class="pill p-m">5–8 anos</span>';
+      if(c.turma==='M')pill='<span class="pill p-M">9–12 anos</span>';
       const ap = TURMA!=='todas' && c.turma && c.turma!=='alm' && c.turma!==TURMA ? ' apagado':'';
-      const destaque = TURMA!=='todas' && c.turma===TURMA ? ';box-shadow:0 0 0 3px '+(TURMA==='m'?'var(--verde)':'var(--roxo)'):'';
-      h+=`<td><div class="cel ${c.c}${ap}" style="${destaque}" data-tip="${encodeURIComponent(`<b>${DIAS[d]} · ${hr}</b><br>${c.d}`)}">${c.t} ${pills}</div></td>`;
+      const dest = TURMA!=='todas' && c.turma===TURMA ? ';box-shadow:0 0 0 3px '+(TURMA==='m'?'var(--verde)':'var(--azul)'):'';
+      h+=`<td><div class="cel ${c.c}${alto?' alto':''}${ap}" style="${dest}" data-tip="${encodeURIComponent(`<b>${DIAS[d]} · ${hr}</b><br>${c.d}`)}">${c.t}${c.sub?`<small>${c.sub}</small>`:''}${pill}</div></td>`;
     });
     h+='</tr>';
   });
   document.getElementById('cal').innerHTML=h;
 }
 desenha();
-document.querySelectorAll('[data-sem]').forEach(b=>b.onclick=()=>{SEM=+b.dataset.sem;document.querySelectorAll('[data-sem]').forEach(x=>x.classList.toggle('on',x===b));desenha()});
 document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{TURMA=b.dataset.t;document.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));desenha()});
 const tip=document.getElementById('tip');
 document.addEventListener('mouseover',e=>{const c=e.target.closest('[data-tip]');if(!c){tip.classList.remove('show');return}
@@ -507,23 +524,34 @@ document.addEventListener('mousemove',e=>{if(!tip.classList.contains('show'))ret
   const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+16,y=e.clientY+16;
   if(x+w>innerWidth-8)x=e.clientX-w-16; if(y+h>innerHeight-8)y=e.clientY-h-16; tip.style.left=x+'px';tip.style.top=y+'px'});
 
-/* ---------- próximos passos ---------- */
-const PASSOS=[
-  ['Valores e viabilidade do passeio externo','Transporte, ingressos, seguro e autorização dos pais'],
-  ['Espaço para o dia de cinema','Auditório ou sala de reuniões adaptável na empresa'],
-  ['Definir valor da inscrição','Considerar passeio e encerramento especial'],
-  ['Página de acompanhamento para os pais','No site da associação / clube, se houver'],
-  ['Camisetas ou coletes das crianças','Cores por turma, tamanhos e fornecedor'],
-  ['Coletes ou camisetas dos monitores','Cor exclusiva da equipe'],
-  ['Encerramento especial','Algodão doce, pipoca, infláveis e cama elástica'],
-  ['Equipe de monitores e recreadores','Quantidade por turma e planejamento das atividades'],
+/* ---------- investimento ---------- */
+const FAIXAS=[
+  {de:40, ate:50,  v:399, nome:'Até 50 crianças', min:'Mínimo de 40 confirmadas'},
+  {de:51, ate:100, v:350, nome:'51 a 100 crianças', min:''},
+  {de:101,ate:150, v:299, nome:'101 a 150 crianças', min:''},
+  {de:151,ate:200, v:249, nome:'151 a 200 crianças', min:''},
 ];
-let marcados=[];try{marcados=JSON.parse(localStorage.getItem('furukawa-passos')||'[]')}catch(e){}
-document.getElementById('check').innerHTML=PASSOS.map((p,i)=>`<label><input type="checkbox" data-i="${i}" ${marcados.includes(i)?'checked':''}><span>${p[0]}<small>${p[1]}</small></span></label>`).join('');
-function progresso(){const cks=[...document.querySelectorAll('#check input')];const n=cks.filter(c=>c.checked).length;
-  document.getElementById('pct').textContent=`${n} de ${cks.length}`;document.getElementById('barra').style.width=(n/cks.length*100)+'%';
-  try{localStorage.setItem('furukawa-passos',JSON.stringify(cks.filter(c=>c.checked).map(c=>+c.dataset.i)))}catch(e){}}
-document.getElementById('check').addEventListener('change',progresso);progresso();
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+document.getElementById('planos').innerHTML=FAIXAS.map((f,i)=>`
+  <div class="pl" data-i="${i}">
+    <div class="faixa-n">${f.nome}</div><div class="min">${f.min}</div>
+    <div class="preco"><sup>R$</sup>${f.v}</div><div class="por">por criança</div>
+    <div class="mon">${Math.ceil(f.de/10)} a ${f.ate/10} monitores</div>
+  </div>`).join('');
+const qtd=document.getElementById('qtd');
+function simula(){
+  const n=+qtd.value; document.getElementById('qtdTxt').textContent=n;
+  const fi=FAIXAS.findIndex(f=>n<=f.ate); const f=FAIXAS[Math.max(0,fi)];
+  const abaixo=n<40;
+  document.querySelectorAll('.pl').forEach((p,i)=>p.classList.toggle('on',!abaixo&&i===fi));
+  document.getElementById('vUn').textContent=abaixo?'—':brl(f.v);
+  document.getElementById('vMon').textContent=Math.ceil(n/10);
+  document.getElementById('vTot').textContent=abaixo?'—':brl(n*f.v);
+  document.getElementById('alerta').style.display=abaixo?'block':'none';
+}
+qtd.addEventListener('input',simula);
+document.getElementById('planos').addEventListener('click',e=>{const p=e.target.closest('.pl');if(!p)return;qtd.value=FAIXAS[+p.dataset.i].ate;simula()});
+simula();
 
 /* ---------- navegação ---------- */
 const slides=[...document.querySelectorAll('.slide')];let atual=0;
@@ -539,13 +567,14 @@ function ir(n){atual=Math.max(0,Math.min(slides.length-1,n));
 document.getElementById('ant').onclick=()=>ir(atual-1);
 document.getElementById('prox').onclick=()=>ir(atual+1);
 document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&document.getElementById('modal').classList.contains('on')){fecha();return}
   if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();ir(atual+1)}
   if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();ir(atual-1)}
   if(e.key==='f'||e.key==='F')tela();});
 let tx=null;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
 document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;
-  if(Math.abs(dx)>70&&!e.target.closest('.cal-wrap'))ir(atual+(dx<0?1:-1));tx=null});
+  if(Math.abs(dx)>70&&!e.target.closest('.cal-wrap,input'))ir(atual+(dx<0?1:-1));tx=null});
 document.querySelectorAll('.flip').forEach(f=>f.addEventListener('click',()=>f.classList.toggle('virado')));
 
 /* tela cheia */
