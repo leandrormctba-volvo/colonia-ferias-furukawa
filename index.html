@@ -5,27 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Colônia de Férias Furukawa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sol:#FFB703; --laranja:#FB8500; --azul:#219EBC; --marinho:#023047; --ceu:#8ECAE6;
-  --verde:#2A9D8F; --rosa:#EF476F; --roxo:#7B61FF; --creme:#FFF8EC; --texto:#16324a;
-  --card:#ffffff; --sombra:0 10px 30px rgba(2,48,71,.15);
+  --sol:#F6B21B; --laranja:#EE7B22; --azul:#1C5D99; --marinho:#0A2342; --ceu:#9CC3E6;
+  --verde:#2A9D8F; --rosa:#E76F51; --roxo:#4F63C4; --creme:#F5F7FA; --texto:#1D2B3A;
+  --card:#ffffff; --sombra:0 8px 24px rgba(10,35,66,.12);
 }
+/* faixa colorida no topo: o toque lúdico */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:6px;z-index:60;
+  background:linear-gradient(90deg,var(--marinho) 0 40%,var(--azul) 40% 60%,var(--verde) 60% 75%,var(--sol) 75% 90%,var(--laranja) 90%)}
+h1,h2,h3{font-weight:700;letter-spacing:-.01em}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{font-family:'Nunito',system-ui,sans-serif;color:var(--texto);background:var(--creme);overflow:hidden}
-h1,h2,h3,.titulo{font-family:'Baloo 2','Nunito',sans-serif;line-height:1.05}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--texto);background:var(--creme);overflow:hidden}
+h1,h2,h3,.titulo{font-family:'Poppins',sans-serif;line-height:1.05}
 
 /* ---------- barra superior ---------- */
 .topo{position:fixed;top:14px;right:16px;z-index:50;display:flex;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:800 15px 'Nunito',sans-serif;
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:800 15px 'Inter',sans-serif;
   padding:11px 16px;border-radius:999px;background:#fff;color:var(--marinho);box-shadow:var(--sombra);transition:.2s}
 .btn:hover{transform:translateY(-2px);background:var(--sol)}
 .btn svg{width:20px;height:20px}
 .btn.prim{background:var(--laranja);color:#fff}
 .btn.prim:hover{background:var(--rosa)}
-.marca-mini{position:fixed;top:14px;left:16px;z-index:50;width:120px;opacity:.95;transition:.3s}
+.marca-mini{position:fixed;top:18px;left:16px;z-index:50;width:170px;transition:.3s;filter:drop-shadow(0 4px 10px rgba(10,35,66,.12))}
 body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 
 /* ---------- slides ---------- */
@@ -45,16 +49,16 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 @keyframes flutua{50%{transform:translateY(-24px) scale(1.06)}}
 
 /* ---------- capa ---------- */
-.capa{background:linear-gradient(135deg,rgba(2,48,71,.78),rgba(33,158,188,.55)),url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1800&q=75') center/cover;color:#fff;align-items:center;text-align:center}
-.capa .logo{width:min(440px,78vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));animation:entra 1s ease both}
-.capa h1{font-size:clamp(40px,6.5vw,86px);margin-top:14px;text-shadow:0 6px 24px rgba(0,0,0,.35)}
+.capa{background:linear-gradient(120deg,rgba(10,35,66,.92) 0%,rgba(10,35,66,.7) 45%,rgba(28,93,153,.35)),url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=1800&q=75') center/cover;color:#fff;align-items:center;text-align:center}
+.capa .logo{width:min(460px,82vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3));animation:entra 1s ease both}
+.capa h1{font-size:clamp(36px,5.4vw,72px);margin-top:22px;text-shadow:0 4px 18px rgba(0,0,0,.3)}
 .capa h1 span{color:var(--sol)}
 .capa p{font-size:clamp(16px,1.8vw,22px);margin-top:12px;opacity:.95}
 .capa .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
 .chip{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);padding:10px 18px;border-radius:999px;font-weight:800}
 .comecar{margin-top:34px}
-@keyframes entra{from{opacity:0;transform:scale(.85) rotate(-4deg)}}
-.sol-gira{transform-origin:100px 100px;animation:gira 30s linear infinite}
+@keyframes entra{from{opacity:0;transform:translateY(16px)}}
+.sol-gira{transform-origin:90px 90px;animation:gira 40s linear infinite}
 @keyframes gira{to{transform:rotate(360deg)}}
 
 /* ---------- cards virar (objetivos) ---------- */
@@ -62,13 +66,13 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 .flip{perspective:1200px;height:300px;cursor:pointer}
 .flip .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
 .flip:hover .in,.flip.virado .in{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:var(--sombra)}
+.face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:var(--sombra)}
 .frente{background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:20px}
 .frente::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(2,48,71,.92),rgba(2,48,71,.05) 65%)}
 .frente>*{position:relative}
 .frente .ico{font-size:34px}
 .frente h3{font-size:26px}
-.frente .grande{font:800 34px 'Baloo 2';color:var(--sol)}
+.frente .grande{font:800 34px 'Poppins';color:var(--sol)}
 .frente small{opacity:.85;font-weight:700}
 .verso{transform:rotateY(180deg);padding:24px;color:#fff;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:16px}
 .verso h3{font-size:24px}
@@ -77,12 +81,12 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 
 /* ---------- atividades ---------- */
 .ativ{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.at{position:relative;border-radius:22px;overflow:hidden;height:210px;cursor:pointer;box-shadow:var(--sombra);background:#ccc center/cover;transition:transform .3s}
-.at:hover{transform:translateY(-6px) rotate(-.6deg)}
-.at::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(2,48,71,.9),transparent 60%);transition:.3s}
-.at:hover::after{background:linear-gradient(to top,rgba(251,133,0,.92),rgba(251,133,0,.15))}
+.at{position:relative;border-radius:16px;overflow:hidden;height:210px;cursor:pointer;box-shadow:var(--sombra);background:#ccc center/cover;transition:transform .3s}
+.at:hover{transform:translateY(-6px)}
+.at::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,35,66,.92),transparent 60%);transition:.3s}
+.at:hover::after{background:linear-gradient(to top,rgba(10,35,66,.95),rgba(28,93,153,.35));box-shadow:inset 0 -5px 0 var(--laranja)}
 .at .t{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;color:#fff}
-.at .t b{font:800 22px 'Baloo 2';display:block}
+.at .t b{font:800 22px 'Poppins';display:block}
 .at .t span{font-size:13px;font-weight:700;opacity:.9}
 .at .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--sol);color:var(--marinho);font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px}
 .at .mais{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--laranja);display:grid;place-items:center;font-weight:900;font-size:22px;transition:.3s}
@@ -93,13 +97,13 @@ body[data-slide="0"] .marca-mini{opacity:0;pointer-events:none}
 
 /* ---------- calendário ---------- */
 .cal-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.tog{border:2px solid var(--marinho);background:#fff;color:var(--marinho);font:800 14px 'Nunito';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.2s}
+.tog{border:2px solid var(--marinho);background:#fff;color:var(--marinho);font:800 14px 'Inter';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.2s}
 .tog.on{background:var(--marinho);color:#fff}
 .tog.m.on{background:var(--verde);border-color:var(--verde)}
 .tog.M.on{background:var(--roxo);border-color:var(--roxo)}
 .cal-wrap{flex:none;overflow-x:auto;overflow-y:hidden;border-radius:18px;box-shadow:var(--sombra);background:#fff}
 table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;font-size:13.5px}
-.cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Baloo 2'}
+.cal th{background:var(--marinho);color:#fff;padding:12px 8px;font:800 16px 'Poppins'}
 .cal th:first-child{width:96px}
 .cal td{padding:3px 5px;border-bottom:1px solid #eef2f5;vertical-align:middle}
 .cal td.h{font-weight:800;color:var(--marinho);text-align:center;background:#f5f9fc;white-space:nowrap;font-size:13px}
@@ -107,12 +111,12 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 .cal th{padding:8px!important}
 #cal-slide h2{font-size:clamp(28px,3.4vw,44px)}
 .cel:hover{transform:scale(1.04);box-shadow:0 6px 16px rgba(2,48,71,.18);z-index:3}
-.c-cafe{background:#FFE8B3}
-.c-rec{background:#D6EFF6}
-.c-alm{background:#E4E4E4}
-.c-fim{background:#FFD6C2}
-.c-pas{background:linear-gradient(135deg,#C9F2E8,#E7DEFF);border:2px dashed var(--verde)}
-.c-enc{background:linear-gradient(135deg,#FFE066,#FFB4C4);border:2px solid var(--rosa)}
+.c-cafe{background:#FDF0D3}
+.c-rec{background:#E4EEF8}
+.c-alm{background:#ECEFF3}
+.c-fim{background:#FBE3D3}
+.c-pas{background:#DFF2EF;border:2px dashed var(--verde)}
+.c-enc{background:#FFF0C7;border:2px solid var(--sol)}
 .cel small{display:block;font-weight:700;opacity:.75;font-size:11.5px;margin-top:2px}
 .pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;color:#fff;margin:2px 2px 0 0}
 .p-m{background:var(--verde)} .p-M{background:var(--roxo)}
@@ -130,7 +134,7 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 details.ac{background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(2,48,71,.1);overflow:hidden;border-left:7px solid var(--azul)}
 details.ac:nth-child(2){border-color:var(--verde)} details.ac:nth-child(3){border-color:var(--laranja)}
 details.ac:nth-child(4){border-color:var(--rosa)} details.ac:nth-child(5){border-color:var(--roxo)} details.ac:nth-child(6){border-color:var(--sol)}
-details.ac summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:14px;font:800 19px 'Baloo 2'}
+details.ac summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:14px;font:800 19px 'Poppins'}
 details.ac summary::-webkit-details-marker{display:none}
 details.ac summary .e{font-size:30px}
 details.ac summary::after{content:"+";margin-left:auto;font-size:26px;color:var(--laranja);transition:.3s}
@@ -149,7 +153,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
 .barra div{height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--sol));transition:width .4s}
 
 /* ---------- final ---------- */
-.final{background:linear-gradient(135deg,rgba(251,133,0,.85),rgba(239,71,111,.8)),url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=1800&q=75') center/cover;color:#fff;text-align:center;align-items:center}
+.final{background:linear-gradient(120deg,rgba(10,35,66,.92),rgba(28,93,153,.6)),url('https://images.unsplash.com/photo-1614113036347-9f60df80730a?w=1800&q=75') center/cover;color:#fff;text-align:center;align-items:center}
 .final h2{color:#fff;font-size:clamp(40px,6vw,80px)}
 
 /* ---------- modal ---------- */
@@ -208,31 +212,35 @@ details.ac .cx li{margin:4px 0 4px 16px}
 <!-- logo reutilizável -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="logo" viewBox="0 0 520 300">
-      <g transform="translate(160,20)">
+    <symbol id="logo" viewBox="0 0 520 180">
+      <!-- selo branco -->
+      <rect x="2" y="2" width="516" height="176" rx="26" fill="#fff"/>
+      <!-- sol -->
+      <g transform="translate(6,0)">
         <g class="sol-gira">
-          <g fill="#FFB703">
-            <path d="M100 0 l10 32 h-20z"/><path d="M100 200 l10 -32 h-20z"/>
-            <path d="M0 100 l32 10 v-20z"/><path d="M200 100 l-32 10 v-20z"/>
-            <path d="M29 29 l29 15 -14 14z"/><path d="M171 171 l-29 -15 14 -14z"/>
-            <path d="M171 29 l-15 29 -14 -14z"/><path d="M29 171 l15 -29 14 14z"/>
+          <g stroke="#F6B21B" stroke-width="9" stroke-linecap="round">
+            <path d="M90 22v16M90 142v16M22 90h16M142 90h16M42 42l11 11M127 127l11 11M138 42l-11 11M53 127l-11 11"/>
           </g>
         </g>
-        <circle cx="100" cy="100" r="58" fill="#FB8500"/>
-        <circle cx="100" cy="100" r="50" fill="#FFB703"/>
-        <circle cx="82" cy="92" r="6" fill="#023047"/><circle cx="118" cy="92" r="6" fill="#023047"/>
-        <path d="M76 112 q24 26 48 0" stroke="#023047" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <circle cx="70" cy="110" r="7" fill="#EF476F" opacity=".5"/><circle cx="130" cy="110" r="7" fill="#EF476F" opacity=".5"/>
+        <circle cx="90" cy="90" r="40" fill="#F6B21B"/>
+        <path d="M74 96 q16 16 32 0" stroke="#0A2342" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="77" cy="80" r="5" fill="#0A2342"/><circle cx="103" cy="80" r="5" fill="#0A2342"/>
       </g>
-      <text x="260" y="228" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="46" fill="#fff" stroke="#023047" stroke-width="8" paint-order="stroke" letter-spacing="1">Colônia de Férias</text>
-      <g font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="64" text-anchor="middle" stroke="#023047" stroke-width="9" paint-order="stroke">
-        <text x="260" y="290"><tspan fill="#EF476F">F</tspan><tspan fill="#FFB703">U</tspan><tspan fill="#2A9D8F">R</tspan><tspan fill="#8ECAE6">U</tspan><tspan fill="#FB8500">K</tspan><tspan fill="#7B61FF">A</tspan><tspan fill="#EF476F">W</tspan><tspan fill="#FFB703">A</tspan></text>
+      <!-- textos -->
+      <text x="190" y="72" font-family="Poppins, Inter, sans-serif" font-weight="600" font-size="27" fill="#EE7B22" letter-spacing="2">COLÔNIA DE FÉRIAS</text>
+      <text x="188" y="128" font-family="Poppins, Inter, sans-serif" font-weight="700" font-size="54" fill="#0A2342" letter-spacing="3">FURUKAWA</text>
+      <!-- tracinhos coloridos -->
+      <g>
+        <rect x="190" y="144" width="74" height="8" rx="4" fill="#1C5D99"/>
+        <rect x="270" y="144" width="44" height="8" rx="4" fill="#2A9D8F"/>
+        <rect x="320" y="144" width="30" height="8" rx="4" fill="#F6B21B"/>
+        <rect x="356" y="144" width="18" height="8" rx="4" fill="#EE7B22"/>
       </g>
     </symbol>
   </defs>
 </svg>
 
-<svg class="marca-mini" viewBox="0 0 520 300"><use href="#logo"/></svg>
+<svg class="marca-mini" viewBox="0 0 520 180"><use href="#logo"/></svg>
 
 <div class="topo">
   <button class="btn" id="bPdf" title="Baixar a apresentação em PDF (na janela que abrir, escolha “Salvar como PDF”)">
@@ -249,13 +257,13 @@ details.ac .cx li{margin:4px 0 4px 16px}
 
   <!-- 1 CAPA -->
   <section class="slide capa ativo">
-    <svg class="logo" viewBox="0 0 520 300"><use href="#logo"/></svg>
+    <svg class="logo" viewBox="0 0 520 180"><use href="#logo"/></svg>
     <h1>Proposta <span>Colônia de Férias</span></h1>
     <p>Duas semanas de muita diversão, criatividade e amizade para os filhos dos colaboradores</p>
     <div class="chips">
-      <div class="chip">👧🧒 5 a 12 anos</div>
-      <div class="chip">⏰ 8h às 17h</div>
-      <div class="chip">📅 2 semanas</div>
+      <div class="chip">5 a 12 anos</div>
+      <div class="chip">8h às 17h</div>
+      <div class="chip">2 semanas</div>
     </div>
     <button class="btn comecar" onclick="ir(1)">Vamos começar! →</button>
   </section>
@@ -374,7 +382,7 @@ details.ac .cx li{margin:4px 0 4px 16px}
 
   <!-- 7 FINAL -->
   <section class="slide final">
-    <svg class="logo" style="width:min(340px,70vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3))" viewBox="0 0 520 300"><use href="#logo"/></svg>
+    <svg class="logo" style="width:min(340px,70vw);filter:drop-shadow(0 12px 30px rgba(0,0,0,.3))" viewBox="0 0 520 180"><use href="#logo"/></svg>
     <h2>Obrigado!</h2>
     <p style="font-size:clamp(16px,1.8vw,22px);margin-top:10px">Vamos juntos fazer as férias mais divertidas do ano? ☀️</p>
   </section>
@@ -466,7 +474,7 @@ function tarde(d,i){
 let SEM=1, TURMA='todas';
 function desenha(){
   const L=grade();
-  let h=`<tr><th>Horário</th>${DIAS.map((d,i)=>`<th>${d}<br><small style="font:700 12px Nunito;opacity:.75">Semana ${SEM}</small></th>`).join('')}</tr>`;
+  let h=`<tr><th>Horário</th>${DIAS.map((d,i)=>`<th>${d}<br><small style="font:600 12px Inter;opacity:.75">Semana ${SEM}</small></th>`).join('')}</tr>`;
   L.forEach(([hr,f])=>{
     h+=`<tr><td class="h">${hr}</td>`;
     DIAS.forEach((_,d)=>{const c=f(d);
