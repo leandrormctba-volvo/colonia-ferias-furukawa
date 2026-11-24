@@ -143,7 +143,8 @@ table.cal{width:100%;border-collapse:separate;border-spacing:0;min-width:820px;f
 .cp .tag{position:absolute;top:18px;right:18px;background:var(--sol);color:var(--marinho);font-weight:800;font-size:11.5px;padding:4px 10px;border-radius:999px}
 
 /* ---------- investimento ---------- */
-.cenarios{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin-top:18px}
+.cenarios{margin-top:18px}
+.tc td{padding:9px 14px!important;font-size:15px}
 table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,47,108,.08);font-size:14px}
 .tc th{background:var(--marinho);color:#fff;font:600 13px 'Poppins';padding:9px 12px;text-align:left}
 .tc th.r,.tc td.r{text-align:right}
@@ -153,7 +154,7 @@ table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;bo
 .tc tr.on td{background:var(--azul);color:#fff}
 .tc td.v{color:var(--azul);font-weight:800}
 .tc tr.on td.v{color:#fff}
-.sim{margin-top:6px;background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 6px 20px rgba(0,47,108,.08);display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:20px;align-items:center}
+.sim{margin-top:6px;background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 6px 20px rgba(0,47,108,.08);display:grid;grid-template-columns:1.3fr .7fr .7fr 1.1fr 1fr;gap:20px;align-items:center}
 .sim label{font-weight:700;color:var(--marinho);font-size:14px}
 .sim input[type=range]{width:100%;accent-color:var(--azul);margin-top:10px}
 .sim .num{font:700 26px 'Poppins';color:var(--marinho)}
@@ -405,11 +406,12 @@ table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;bo
     <div class="sim">
       <div>
         <label for="qtd">Crianças confirmadas: <span class="num" id="qtdTxt">50</span></label>
-        <input type="range" id="qtd" min="50" max="200" step="10" value="50">
+        <input type="range" id="qtd" min="50" max="100" step="10" value="50">
       </div>
       <div class="k"><small>Cenário</small><b id="vCen">1</b></div>
-      <div class="k"><small>Valor estimado total do evento</small><b id="vTot">R$ 20.900</b></div>
-      <div class="k"><small>Valor por criança</small><b id="vUn">R$ 418,00</b></div>
+      <div class="k"><small>Monitores</small><b id="vMon">4</b></div>
+      <div class="k"><small>Valor estimado total do evento</small><b id="vTot">R$ 19.650</b></div>
+      <div class="k"><small>Valor por criança</small><b id="vUn">R$ 393,00</b></div>
     </div>
     <div class="cenarios" id="cenarios"></div>
   </section>
@@ -518,20 +520,20 @@ document.addEventListener('mousemove',e=>{if(!tip.classList.contains('show'))ret
 
 /* ---------- investimento ---------- */
 /* cenários: valor total estimado do evento e valor por criança (total ÷ crianças) */
-const CEN=[[50,20900],[60,26200],[70,28500],[80,30800],[90,33100],[100,35400],[110,37700],[120,40000],
-  [130,42300],[140,44600],[150,46900],[160,49200],[170,51500],[180,53800],[190,56100],[200,58400]]
-  .map(([n,t],i)=>({c:i+1,n,t,u:t/n}));
+const CEN=[[50,4,19650],[60,5,23700],[70,6,25750],[80,8,28800],[90,8,29850],[100,8,30900]]
+  .map(([n,m,t],i)=>({c:i+1,n,m,t,u:t/n}));
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
 const brl2=n=>'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const tabela=lista=>`<table class="tc"><thead><tr><th>Cenário</th><th>Crianças</th><th class="r">Valor estimado total</th><th class="r">Valor por criança</th></tr></thead><tbody>${
-  lista.map(x=>`<tr data-n="${x.n}"><td>${x.c}</td><td>${x.n}</td><td class="r">${brl(x.t)}</td><td class="r v">${brl2(x.u)}</td></tr>`).join('')}</tbody></table>`;
-document.getElementById('cenarios').innerHTML=tabela(CEN.slice(0,8))+tabela(CEN.slice(8));
+const tabela=lista=>`<table class="tc"><thead><tr><th>Cenário</th><th>Crianças</th><th>Monitores</th><th class="r">Valor estimado total do evento</th><th class="r">Valor por criança</th></tr></thead><tbody>${
+  lista.map(x=>`<tr data-n="${x.n}"><td>${x.c}</td><td>${x.n}</td><td>${x.m}</td><td class="r">${brl(x.t)}</td><td class="r v">${brl2(x.u)}</td></tr>`).join('')}</tbody></table>`;
+document.getElementById('cenarios').innerHTML=tabela(CEN);
 const qtd=document.getElementById('qtd');
 function simula(){
   const n=+qtd.value; document.getElementById('qtdTxt').textContent=n;
   const x=CEN.find(c=>c.n===n)||CEN[0];
   document.querySelectorAll('.tc tr[data-n]').forEach(r=>r.classList.toggle('on',+r.dataset.n===x.n));
   document.getElementById('vCen').textContent=x.c;
+  document.getElementById('vMon').textContent=x.m;
   document.getElementById('vTot').textContent=brl(x.t);
   document.getElementById('vUn').textContent=brl2(x.u);
 }
