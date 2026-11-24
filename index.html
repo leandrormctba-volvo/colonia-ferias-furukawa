@@ -190,7 +190,7 @@ table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;bo
 
 /* ---------- navegação ---------- */
 .nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;background:#fff;padding:8px 12px;border-radius:999px;box-shadow:var(--sombra)}
-.nav button.seta{width:40px;height:40px;border-radius:50%;border:0;background:var(--marinho);color:#fff;font-size:20px;cursor:pointer;transition:.2s}
+.nav button.seta{height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--marinho);color:#fff;font:700 15px 'Inter',sans-serif;cursor:pointer;transition:.2s}
 .nav button.seta:hover{background:var(--azul)}
 .nav button.seta:disabled{opacity:.3;cursor:default}
 .pontos{display:flex;gap:7px}
@@ -439,10 +439,9 @@ table.tc{width:100%;border-collapse:separate;border-spacing:0;background:#fff;bo
 </main>
 
 <nav class="nav">
-  <button class="seta" id="ant" aria-label="Anterior">‹</button>
-  <div class="pontos" id="pontos"></div>
+  <button class="seta" id="ant">‹ Voltar</button>
   <span class="contador" id="cont"></span>
-  <button class="seta" id="prox" aria-label="Próximo">›</button>
+  <button class="seta" id="prox">Próximo ›</button>
 </nav>
 
 <div id="tip"></div>
@@ -557,15 +556,12 @@ simula();
 
 /* ---------- navegação ---------- */
 const slides=[...document.querySelectorAll('.slide')];let atual=0;
-const pontos=document.getElementById('pontos');
-pontos.innerHTML=slides.map((_,i)=>`<button aria-label="Slide ${i+1}" onclick="ir(${i})"></button>`).join('');
 function ir(n){atual=Math.max(0,Math.min(slides.length-1,n));
   slides.forEach((s,i)=>{s.classList.toggle('ativo',i===atual);s.classList.toggle('antes',i<atual)});
-  [...pontos.children].forEach((p,i)=>p.classList.toggle('on',i===atual));
   document.getElementById('cont').textContent=`${atual+1}/${slides.length}`;
   document.getElementById('ant').disabled=atual===0;document.getElementById('prox').disabled=atual===slides.length-1;
-  document.body.dataset.slide=atual;fecha();tip.classList.remove('show');
-  try{history.replaceState(null,'','#'+(atual+1))}catch(e){}}
+  document.body.dataset.slide=atual;fecha();tip.classList.remove('show');}
+try{if(location.hash)history.replaceState(null,'',location.pathname+location.search)}catch(e){}
 document.getElementById('ant').onclick=()=>ir(atual-1);
 document.getElementById('prox').onclick=()=>ir(atual+1);
 document.addEventListener('keydown',e=>{
@@ -588,7 +584,7 @@ document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreen
 /* PDF */
 document.getElementById('bPdf').onclick=()=>{const t=document.title;document.title='Proposta Colonia de Ferias Furukawa';window.print();setTimeout(()=>document.title=t,500)};
 
-ir(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
+ir(0); /* ao abrir ou atualizar a página, sempre começa no primeiro slide */
 </script>
 </body>
 </html>
